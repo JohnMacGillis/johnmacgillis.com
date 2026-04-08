@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>John MacGillis</title>
+    <meta name="description" content="I build tools that make public data useful. Civic tech, open data, access to justice.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Newsreader:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: #f8f7f4;
+            color: #3a3a3a;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            font-size: 1rem;
+            -webkit-font-smoothing: antialiased;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* ---- GEOMETRIC DATA BACKGROUND ---- */
+        .geo-bg {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .geo-bg svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .container {
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Content backdrop — lets geometry show through but keeps text readable */
+        .content-frame {
+            max-width: 920px;
+            margin: 0 auto;
+            background: rgba(248, 247, 244, 0.82);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            border-left: 1px solid rgba(255,255,255,0.5);
+            border-right: 1px solid rgba(255,255,255,0.5);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ---- NAV ---- */
+        nav {
+            padding: 1rem 0;
+            background: rgba(248, 247, 244, 0.5);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0,0,0,0.04);
+            position: sticky;
+            top: 0;
+            z-index: 20;
+        }
+        nav .container { display: flex; justify-content: space-between; align-items: center; }
+        .nav-name { font-size: 0.82rem; font-weight: 600; color: #1a1a1a; letter-spacing: -0.01em; }
+        .nav-links { display: flex; gap: 1.75rem; }
+        .nav-links a { color: #999; text-decoration: none; font-size: 0.8rem; font-weight: 500; transition: color 0.2s; }
+        .nav-links a:hover { color: #1a1a1a; }
+
+        /* ---- HERO ---- */
+        .hero { padding: 5rem 0 4rem; position: relative; z-index: 1; }
+        .hero-inner { display: flex; align-items: center; gap: 3.5rem; }
+        .hero-photo {
+            width: 160px; height: 160px;
+            border-radius: 50%; object-fit: cover; flex-shrink: 0;
+            box-shadow: 0 6px 30px rgba(0,0,0,0.07);
+            border: 3px solid rgba(255,255,255,0.8);
+        }
+        .hero-name {
+            font-size: 0.82rem; font-weight: 500; color: #999;
+            letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 0.6rem;
+        }
+        .hero-text h1 {
+            font-size: 3rem; font-weight: 700; color: #111;
+            letter-spacing: -0.045em; line-height: 1.05; margin-bottom: 1rem;
+        }
+        .hero-text .hero-sub {
+            font-size: 1rem; color: #888; max-width: 460px; line-height: 1.6;
+        }
+        .hero-meta { margin-top: 1.5rem; display: flex; flex-wrap: wrap; gap: 0.35rem; }
+        .tag {
+            font-size: 0.68rem; font-weight: 500; color: #777;
+            background: rgba(255,255,255,0.55); backdrop-filter: blur(8px);
+            border: 1px solid rgba(0,0,0,0.05);
+            padding: 0.28rem 0.8rem; border-radius: 100px; letter-spacing: 0.02em;
+        }
+
+        /* ---- THESIS ---- */
+        .thesis { padding: 1.5rem 0 3rem; position: relative; z-index: 1; }
+        .thesis-inner {
+            background: rgba(255,255,255,0.5);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.45);
+            border-radius: 16px; padding: 2.5rem;
+        }
+        .thesis-inner blockquote {
+            font-family: 'Newsreader', Georgia, serif;
+            font-size: 1.5rem; font-weight: 400; font-style: italic;
+            color: #222; line-height: 1.38; margin-bottom: 1.25rem; letter-spacing: -0.01em;
+        }
+        .thesis-inner .thesis-body {
+            color: #777; font-size: 0.88rem; line-height: 1.65;
+        }
+
+        /* ---- SECTION ---- */
+        section { padding: 3rem 0; position: relative; z-index: 1; }
+        .section-label {
+            font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.14em;
+            color: #bbb; margin-bottom: 1.5rem; font-weight: 600;
+        }
+
+        /* ---- BENTO PROJECTS ---- */
+        .bento {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto auto;
+            gap: 0.75rem;
+        }
+        .project {
+            background: rgba(255,255,255,0.5);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.45);
+            border-radius: 16px; padding: 2rem;
+            transition: box-shadow 0.3s ease, transform 0.3s ease, background 0.3s ease;
+            display: flex; flex-direction: column; justify-content: space-between;
+        }
+        .project:hover {
+            background: rgba(255,255,255,0.72);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.05); transform: translateY(-1px);
+        }
+        .project-featured {
+            grid-column: 1 / -1;
+            padding: 2.5rem;
+        }
+        .project-featured h3 { font-size: 1.35rem; }
+        .project-featured .project-stats { gap: 2rem; }
+        .project-featured .stat { font-size: 0.82rem; }
+        .project-featured .stat strong { font-size: 1.5rem; display: block; color: #1a1a1a; margin-bottom: 0.1rem; }
+
+        .project-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.4rem; }
+        .project h3 { font-size: 1.05rem; font-weight: 650; color: #1a1a1a; letter-spacing: -0.02em; }
+        .project-status {
+            font-size: 0.6rem; font-weight: 600; padding: 0.18rem 0.55rem;
+            border-radius: 100px; flex-shrink: 0; margin-left: 1rem;
+            letter-spacing: 0.04em; text-transform: uppercase;
+        }
+        .status-live { color: #16803c; background: rgba(236,253,243,0.8); border: 1px solid rgba(187,247,208,0.6); }
+        .status-soon { color: #92400e; background: rgba(255,251,235,0.8); border: 1px solid rgba(253,230,138,0.6); }
+        .project p { color: #777; font-size: 0.88rem; line-height: 1.6; margin-bottom: 1rem; }
+        .project-small p { font-size: 0.84rem; margin-bottom: 0.75rem; }
+        .project-stats {
+            display: flex; flex-wrap: wrap; gap: 1.25rem; margin-bottom: 1.25rem;
+            padding-top: 1rem; border-top: 1px solid rgba(0,0,0,0.04);
+        }
+        .project-small .project-stats { gap: 0.75rem; }
+        .stat { font-size: 0.75rem; color: #aaa; }
+        .stat strong { color: #444; font-weight: 600; }
+        .project-links { display: flex; align-items: center; gap: 1rem; margin-top: auto; }
+        .btn-primary {
+            display: inline-block; font-size: 0.8rem; font-weight: 600; color: #fff;
+            background: #111; padding: 0.5rem 1.25rem; border-radius: 8px;
+            text-decoration: none; transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+        }
+        .btn-primary:hover { background: #222; transform: translateY(-0.5px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .btn-secondary { font-size: 0.8rem; font-weight: 500; color: #aaa; text-decoration: none; transition: color 0.2s; }
+        .btn-secondary:hover { color: #1a1a1a; }
+
+        /* ---- ABOUT ---- */
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+        .about-col h3 { font-size: 0.85rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.6rem; letter-spacing: -0.01em; }
+        .about-col p { color: #777; font-size: 0.88rem; line-height: 1.7; margin-bottom: 0.6rem; }
+        .about-col p:last-child { margin-bottom: 0; }
+
+        /* ---- CONTACT ---- */
+        .contact { padding: 2.5rem 0 3rem; position: relative; z-index: 1; }
+        .contact-inner {
+            background: rgba(255,255,255,0.5); backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.45);
+            border-radius: 16px; padding: 2.5rem; text-align: center;
+        }
+        .contact-inner p { color: #777; font-size: 0.95rem; margin-bottom: 1.25rem; }
+        .contact-links { display: flex; justify-content: center; gap: 1.5rem; }
+        .contact-links a {
+            color: #1a1a1a; text-decoration: none; font-size: 0.85rem; font-weight: 500;
+            padding-bottom: 2px; border-bottom: 1px solid #ddd; transition: border-color 0.2s;
+        }
+        .contact-links a:hover { border-color: #1a1a1a; }
+
+        /* ---- FOOTER ---- */
+        footer { padding: 1.5rem 0 2rem; position: relative; z-index: 1; }
+        footer p { font-size: 0.7rem; color: #ccc; text-align: center; }
+
+        /* ---- RESPONSIVE ---- */
+        @media (max-width: 640px) {
+            .hero { padding: 3rem 0 2rem; }
+            .hero-inner { flex-direction: column; align-items: flex-start; gap: 1.25rem; }
+            .hero-photo { width: 110px; height: 110px; }
+            .hero-text h1 { font-size: 2.1rem; }
+            .thesis-inner blockquote { font-size: 1.2rem; }
+            .bento { grid-template-columns: 1fr; }
+            .project-featured { padding: 1.75rem; }
+            .project { padding: 1.5rem; border-radius: 14px; }
+            .project-header { flex-direction: column; gap: 0.4rem; }
+            .project-status { margin-left: 0; }
+            .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .contact-inner { padding: 1.75rem; border-radius: 14px; }
+            .contact-links { flex-direction: column; gap: 0.6rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Geometric data visualization background -->
+    <div class="geo-bg">
+        <svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+            <defs>
+                <radialGradient id="glow1" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stop-color="#4A90D9" stop-opacity="0.12"/>
+                    <stop offset="100%" stop-color="#4A90D9" stop-opacity="0"/>
+                </radialGradient>
+                <radialGradient id="glow2" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stop-color="#E8854A" stop-opacity="0.1"/>
+                    <stop offset="100%" stop-color="#E8854A" stop-opacity="0"/>
+                </radialGradient>
+                <radialGradient id="glow3" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stop-color="#4AAE8C" stop-opacity="0.1"/>
+                    <stop offset="100%" stop-color="#4AAE8C" stop-opacity="0"/>
+                </radialGradient>
+            </defs>
+
+            <!-- Ambient glows - spread across page -->
+            <ellipse cx="10%" cy="15%" rx="350" ry="280" fill="url(#glow1)"/>
+            <ellipse cx="85%" cy="10%" rx="320" ry="250" fill="url(#glow2)"/>
+            <ellipse cx="70%" cy="72%" rx="340" ry="270" fill="url(#glow3)"/>
+            <ellipse cx="20%" cy="65%" rx="250" ry="200" fill="url(#glow1)"/>
+            <ellipse cx="90%" cy="48%" rx="220" ry="180" fill="url(#glow2)"/>
+
+            <!-- Connection lines — spread across full page -->
+            <g stroke-width="0.8" fill="none" opacity="0.18">
+                <!-- Blue network - left/top -->
+                <line x1="5%" y1="8%" x2="15%" y2="20%" stroke="#4A90D9"/>
+                <line x1="15%" y1="20%" x2="8%" y2="30%" stroke="#4A90D9"/>
+                <line x1="8%" y1="30%" x2="18%" y2="38%" stroke="#4A90D9"/>
+                <line x1="15%" y1="20%" x2="25%" y2="14%" stroke="#4A90D9"/>
+                <line x1="25%" y1="14%" x2="32%" y2="26%" stroke="#4A90D9"/>
+                <line x1="18%" y1="38%" x2="30%" y2="42%" stroke="#4A90D9"/>
+                <line x1="5%" y1="8%" x2="18%" y2="6%" stroke="#4A90D9"/>
+
+                <!-- Orange network - right/top -->
+                <line x1="78%" y1="4%" x2="88%" y2="14%" stroke="#E8854A"/>
+                <line x1="88%" y1="14%" x2="95%" y2="7%" stroke="#E8854A"/>
+                <line x1="88%" y1="14%" x2="82%" y2="24%" stroke="#E8854A"/>
+                <line x1="82%" y1="24%" x2="93%" y2="30%" stroke="#E8854A"/>
+                <line x1="95%" y1="7%" x2="98%" y2="19%" stroke="#E8854A"/>
+                <line x1="98%" y1="19%" x2="93%" y2="30%" stroke="#E8854A"/>
+
+                <!-- Green network - bottom center/right -->
+                <line x1="58%" y1="68%" x2="68%" y2="76%" stroke="#4AAE8C"/>
+                <line x1="68%" y1="76%" x2="78%" y2="70%" stroke="#4AAE8C"/>
+                <line x1="78%" y1="70%" x2="84%" y2="80%" stroke="#4AAE8C"/>
+                <line x1="58%" y1="68%" x2="52%" y2="80%" stroke="#4AAE8C"/>
+                <line x1="52%" y1="80%" x2="65%" y2="86%" stroke="#4AAE8C"/>
+                <line x1="65%" y1="86%" x2="78%" y2="83%" stroke="#4AAE8C"/>
+                <line x1="68%" y1="76%" x2="65%" y2="86%" stroke="#4AAE8C"/>
+
+                <!-- Cross-network bridges (sparse) -->
+                <line x1="32%" y1="26%" x2="50%" y2="33%" stroke="#4A90D9" opacity="0.4"/>
+                <line x1="50%" y1="33%" x2="82%" y2="24%" stroke="#E8854A" opacity="0.4"/>
+                <line x1="30%" y1="42%" x2="42%" y2="52%" stroke="#4A90D9" opacity="0.3"/>
+                <line x1="42%" y1="52%" x2="58%" y2="68%" stroke="#4AAE8C" opacity="0.3"/>
+                <line x1="93%" y1="30%" x2="88%" y2="52%" stroke="#E8854A" opacity="0.3"/>
+                <line x1="88%" y1="52%" x2="78%" y2="70%" stroke="#4AAE8C" opacity="0.3"/>
+
+                <!-- Geometric shapes -->
+                <polygon points="70,110 95,60 120,110" stroke="#4A90D9" opacity="0.6"/>
+                <polygon points="260,310 290,260 320,310" stroke="#4A90D9" opacity="0.4"/>
+                <polygon points="1200,65 1225,20 1250,65 1225,110" stroke="#E8854A" opacity="0.5"/>
+                <polygon points="1000,420 1025,380 1050,420 1025,460" stroke="#E8854A" opacity="0.4"/>
+                <polygon points="820,580 845,565 870,580 870,608 845,623 820,608" stroke="#4AAE8C" opacity="0.5"/>
+                <polygon points="140,500 162,488 184,500 184,524 162,536 140,524" stroke="#4AAE8C" opacity="0.4"/>
+            </g>
+
+            <!-- Data point nodes - spread across -->
+            <g>
+                <!-- Blue nodes -->
+                <circle cx="5%" cy="8%" r="4.5" fill="#4A90D9" opacity="0.35"/>
+                <circle cx="15%" cy="20%" r="6" fill="#4A90D9" opacity="0.22"/>
+                <circle cx="8%" cy="30%" r="3.5" fill="#4A90D9" opacity="0.28"/>
+                <circle cx="18%" cy="38%" r="4" fill="#4A90D9" opacity="0.22"/>
+                <circle cx="25%" cy="14%" r="3" fill="#4A90D9" opacity="0.3"/>
+                <circle cx="32%" cy="26%" r="5" fill="#4A90D9" opacity="0.18"/>
+                <circle cx="18%" cy="6%" r="2.5" fill="#4A90D9" opacity="0.25"/>
+                <circle cx="30%" cy="42%" r="3.5" fill="#4A90D9" opacity="0.18"/>
+
+                <!-- Orange nodes -->
+                <circle cx="78%" cy="4%" r="3.5" fill="#E8854A" opacity="0.32"/>
+                <circle cx="88%" cy="14%" r="6" fill="#E8854A" opacity="0.22"/>
+                <circle cx="95%" cy="7%" r="3" fill="#E8854A" opacity="0.28"/>
+                <circle cx="82%" cy="24%" r="4" fill="#E8854A" opacity="0.2"/>
+                <circle cx="93%" cy="30%" r="5" fill="#E8854A" opacity="0.18"/>
+                <circle cx="98%" cy="19%" r="2.5" fill="#E8854A" opacity="0.22"/>
+                <circle cx="88%" cy="52%" r="3.5" fill="#E8854A" opacity="0.15"/>
+
+                <!-- Green nodes -->
+                <circle cx="58%" cy="68%" r="4" fill="#4AAE8C" opacity="0.28"/>
+                <circle cx="68%" cy="76%" r="6" fill="#4AAE8C" opacity="0.2"/>
+                <circle cx="78%" cy="70%" r="3.5" fill="#4AAE8C" opacity="0.28"/>
+                <circle cx="84%" cy="80%" r="4" fill="#4AAE8C" opacity="0.18"/>
+                <circle cx="52%" cy="80%" r="3" fill="#4AAE8C" opacity="0.22"/>
+                <circle cx="65%" cy="86%" r="5" fill="#4AAE8C" opacity="0.18"/>
+                <circle cx="78%" cy="83%" r="2.5" fill="#4AAE8C" opacity="0.2"/>
+
+                <!-- Bridge nodes -->
+                <circle cx="50%" cy="33%" r="4" fill="#888" opacity="0.1"/>
+                <circle cx="42%" cy="52%" r="3" fill="#888" opacity="0.08"/>
+
+                <!-- Scattered accents -->
+                <circle cx="45%" cy="10%" r="2" fill="#4A90D9" opacity="0.15"/>
+                <circle cx="62%" cy="16%" r="2" fill="#E8854A" opacity="0.12"/>
+                <circle cx="35%" cy="58%" r="2" fill="#4AAE8C" opacity="0.12"/>
+                <circle cx="92%" cy="62%" r="2" fill="#E8854A" opacity="0.1"/>
+                <circle cx="8%" cy="72%" r="2" fill="#4A90D9" opacity="0.12"/>
+                <circle cx="40%" cy="88%" r="2" fill="#4AAE8C" opacity="0.12"/>
+            </g>
+        </svg>
+    </div>
+
+    <div class="content-frame">
+    <nav>
+        <div class="container">
+            <span class="nav-name">John MacGillis</span>
+            <div class="nav-links">
+                <a href="#projects">Projects</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="container">
+            <div class="hero-inner">
+                <img src="Headshot.jpg" alt="John MacGillis" class="hero-photo">
+                <div class="hero-text">
+                    <p class="hero-name">John MacGillis</p>
+                    <h1>I build tools that make public data useful.</h1>
+                    <p class="hero-sub">Nova Scotia's court decisions, legislative debates, and docket schedules — indexed, searchable, and free.</p>
+                    <div class="hero-meta">
+                        <span class="tag">Director of Growth</span>
+                        <span class="tag">NSBS Council</span>
+                        <span class="tag">Journalist</span>
+                        <span class="tag">Builder</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="thesis">
+        <div class="container">
+            <div class="thesis-inner">
+                <blockquote>Bad design is not neutral. It protects the institutions that can afford to ignore it, and punishes everyone else.</blockquote>
+                <p class="thesis-body">When a court docket is an Oracle-generated PDF emailed to a mailing list, or 30 years of legislative debate is buried in early-2000s HTML, or case law sits behind a paywall — the friction is the point. Public records that the public can't actually use aren't public in any way that matters.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <div class="container">
+            <div class="section-label">Projects</div>
+
+            <div class="bento">
+
+                <div class="project project-featured">
+                    <div>
+                        <div class="project-header">
+                            <h3>NS Legal Research</h3>
+                            <span class="project-status status-live">Live</span>
+                        </div>
+                        <p>Free AI-powered legal research platform for Nova Scotia lawyers. A public alternative to commercial tools that every lawyer in the province can use, regardless of firm size or budget.</p>
+                        <div class="project-stats">
+                            <span class="stat"><strong>17,000+</strong> court decisions</span>
+                            <span class="stat"><strong>8</strong> research tools</span>
+                            <span class="stat"><strong>AI-powered</strong> semantic search + citation graph</span>
+                        </div>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://seahorse-app-6b8lk.ondigitalocean.app" class="btn-primary" target="_blank">Try the platform &rarr;</a>
+                        <a href="https://github.com/JohnMacGillis/ns-legal-research" class="btn-secondary" target="_blank">Source code</a>
+                    </div>
+                </div>
+
+                <div class="project project-small">
+                    <div>
+                        <div class="project-header">
+                            <h3>Court Docket Tracker</h3>
+                            <span class="project-status status-soon">Coming soon</span>
+                        </div>
+                        <p>Searchable index of NS court schedules. Party names, lawyers, matter types, self-representation tracking.</p>
+                        <div class="project-stats">
+                            <span class="stat"><strong>All NS courts</strong> unified</span>
+                            <span class="stat"><strong>Alerts</strong> by party or lawyer</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project project-small">
+                    <div>
+                        <div class="project-header">
+                            <h3>Hansard Search</h3>
+                            <span class="project-status status-soon">Coming soon</span>
+                        </div>
+                        <p>Semantic search across 30+ years of NS legislative debate. MLA profiles, voting patterns, committee transcripts.</p>
+                        <div class="project-stats">
+                            <span class="stat"><strong>30+ years</strong> of debate</span>
+                            <span class="stat"><strong>11</strong> committees indexed</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <div class="section-label">About</div>
+            <div class="about-grid">
+                <div class="about-col">
+                    <h3>Background</h3>
+                    <p>I trained as a journalist at Carleton University and have written for The Walrus and Financial Post. I spent two years inside the Nova Scotia Barristers' Society working across communications, process automation, and regulatory modernization with teams across the organization.</p>
+                    <p>Now I work at a regional law firm, where I split my time between growth strategy and building internal tools — workflow automation, document generation, and system integrations that replaced most of the manual work across the practice.</p>
+                </div>
+                <div class="about-col">
+                    <h3>What drives this work</h3>
+                    <p>I spent enough time inside institutions — a legal regulator, a law firm, newsrooms — to see how information asymmetry works in practice. The data exists. The interfaces don't.</p>
+                    <p>Someone looking up whether their landlord has been sued before shouldn't need a Westlaw subscription. A journalist covering the legislature shouldn't have to read HTML from 2003. The problem isn't access — it's design.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="contact-inner">
+                <p>I'm interested in open data, civic tech, access to justice, and legal technology. If you're working on something in that space, I'd like to hear about it.</p>
+                <div class="contact-links">
+                    <a href="mailto:john@johnmacgillis.ca">Email</a>
+                    <a href="https://github.com/JohnMacGillis" target="_blank">GitHub</a>
+                    <a href="https://linkedin.com/in/johnmacgillis" target="_blank">LinkedIn</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 John MacGillis</p>
+        </div>
+    </footer>
+    </div><!-- end content-frame -->
+
+</body>
+</html>
