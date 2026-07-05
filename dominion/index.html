@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dominion — a 1901 newspaper mystery</title>
+<meta name="description" content="You are a correspondent in 1901. Chase the year's real stories, decode them in real Morse, and choose what the paper prints — the scoop, or the truth. Coming to the App Store.">
+<meta property="og:title" content="Dominion — a 1901 newspaper mystery">
+<meta property="og:description" content="Read the news in real Morse. Chase 1901's real stories. Print the scoop — or the truth.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%93%B0%3C/text%3E%3C/svg%3E">
+<style>
+  /* ============================================================================
+     DOMINION — promo page for johnmacgillis.ca/dominion. Self-contained.
+     TO ADD ART: drop 5 files into  /dominion/shots/  named morse.jpg, interview.jpg,
+     corkboard.jpg, scene.jpg, choice.jpg. They appear in the reel AND the gallery
+     automatically (used as CSS backgrounds — if a file is missing you just see a
+     styled placeholder, never a broken image). Nothing else to edit for art.
+     EDIT the links marked  <!-- EDIT -->  (App Store URL, your email).
+     ============================================================================ */
+  :root {
+    --paper:#e7dfce; --paper-2:#efe8d9; --ink:#211a10; --ink-soft:#50442f;
+    --rule:#c2b48f; --oxblood:#8e2f22; --brass:#8f7233;
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
+    --mono:ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+  }
+  * { box-sizing:border-box; }
+  html { -webkit-text-size-adjust:100%; }
+  body {
+    margin:0; background-color:var(--paper); color:var(--ink);
+    font-family:var(--serif); line-height:1.65; -webkit-font-smoothing:antialiased;
+    background-image:
+      repeating-linear-gradient(0deg, rgba(33,26,16,0.022) 0 1px, transparent 1px 4px),
+      radial-gradient(120% 90% at 50% 0%, transparent 60%, rgba(33,26,16,0.06) 100%);
+  }
+  .sheet { max-width:68rem; margin:0 auto; padding:clamp(1.1rem,4vw,2.75rem); }
+  a { color:var(--oxblood); }
+  :focus-visible { outline:2px solid var(--oxblood); outline-offset:3px; }
+  .label { font-family:var(--mono); font-size:0.66rem; letter-spacing:0.28em; text-transform:uppercase; color:var(--ink-soft); }
+
+  /* nameplate */
+  .nameplate { border-top:3px solid var(--ink); border-bottom:1px solid var(--ink); padding:0.5rem 0 0.9rem; text-align:center; }
+  .ears { display:flex; justify-content:space-between; align-items:baseline; font-family:var(--mono); font-size:0.62rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--ink-soft); padding-bottom:0.5rem; }
+  .masthead { font-family:var(--serif); font-weight:800; font-size:clamp(2.9rem,13vw,7.5rem); line-height:0.9; letter-spacing:0.02em; margin:0.1rem 0 0.35rem; text-wrap:balance; }
+  .dateline { display:flex; gap:0.9rem; justify-content:center; flex-wrap:wrap; align-items:center; border-top:1px solid var(--rule); border-bottom:1px solid var(--rule); padding:0.4rem 0; margin-top:0.4rem; font-family:var(--mono); font-size:0.66rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--ink-soft); }
+  .dateline b { color:var(--oxblood); font-weight:700; }
+
+  /* hero: reel + pitch side by side on wide screens */
+  .hero { display:grid; grid-template-columns:1fr; gap:clamp(1.4rem,4vw,2.6rem); align-items:center; padding:clamp(1.6rem,5vw,3rem) 0; }
+  @media (min-width:52rem) { .hero { grid-template-columns:minmax(0,1fr) minmax(0,1.05fr); } }
+  .pitch { text-align:center; }
+  @media (min-width:52rem) { .pitch { text-align:left; } }
+  .kicker { color:var(--oxblood); }
+  .headline { font-family:var(--serif); font-weight:800; text-wrap:balance; font-size:clamp(1.9rem,5.4vw,3.2rem); line-height:1.03; margin:0.6rem 0 0.7rem; }
+  .deck { font-size:clamp(1.05rem,2.4vw,1.25rem); font-style:italic; color:var(--ink-soft); margin:0 0 1.5rem; text-wrap:balance; }
+  .cta { display:flex; gap:0.8rem; flex-wrap:wrap; justify-content:center; }
+  @media (min-width:52rem) { .cta { justify-content:flex-start; } }
+  .btn { font-family:var(--mono); font-size:0.8rem; letter-spacing:0.12em; text-transform:uppercase; text-decoration:none; padding:0.85rem 1.4rem; border:1.5px solid var(--ink); border-radius:2px; transition:transform 0.12s ease, background 0.12s ease; }
+  .btn-primary { background:var(--ink); color:var(--paper); }
+  .btn-primary:hover { background:var(--oxblood); border-color:var(--oxblood); transform:translateY(-1px); }
+  .btn-ghost { background:transparent; color:var(--ink); }
+  .btn-ghost:hover { background:rgba(33,26,16,0.06); transform:translateY(-1px); }
+
+  /* ── the motion reel (hero visual) ─────────────────────────────────────── */
+  .stage { position:relative; aspect-ratio:9/16; width:100%; max-width:19rem; margin:0 auto; background:var(--ink); border-radius:14px; overflow:hidden; box-shadow:0 20px 55px rgba(33,26,16,0.35); color:var(--paper); }
+  .slide { position:absolute; inset:0; opacity:0; transition:opacity .9s ease; }
+  .slide.active { opacity:1; }
+  .shot { position:absolute; inset:0; background-size:cover; background-position:center;
+          background-color:#14100a; background-image:
+            repeating-linear-gradient(135deg, rgba(178,146,78,0.06) 0 12px, transparent 12px 24px); }
+  .ph { position:absolute; inset:0; display:grid; place-items:center; text-align:center; padding:1rem;
+        font-family:var(--mono); font-size:0.64rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--brass); line-height:1.9; }
+  .shot.filled + .ph { display:none; } /* hidden once a real screenshot loads */
+  @media (prefers-reduced-motion: no-preference) { .slide.active .shot { animation:kb 3.8s ease-out both; } @keyframes kb { from { transform:scale(1.12) translateY(2%); } to { transform:none; } } }
+  .scrim { position:absolute; inset:0; background:linear-gradient(0deg, rgba(12,10,7,0.88) 0%, rgba(12,10,7,0.05) 44%, rgba(12,10,7,0.35) 100%); }
+  .cap { position:absolute; left:0; right:0; bottom:8%; padding:0 8%; text-align:center; }
+  .cap .eyebrow { font-family:var(--mono); font-size:0.6rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--brass); }
+  .cap .line { font-family:var(--serif); font-weight:800; font-size:clamp(1.3rem,4vw,1.7rem); line-height:1.08; margin-top:0.35rem; text-wrap:balance; }
+  .card { position:absolute; inset:0; display:grid; place-items:center; text-align:center; padding:8%; background:radial-gradient(120% 90% at 50% 40%, #241a10, #0c0a07); }
+  .card .morse { font-family:var(--mono); color:var(--brass); letter-spacing:0.2em; font-size:0.95rem; }
+  .card .word { font-family:var(--serif); font-weight:800; font-size:clamp(2.2rem,9vw,3rem); letter-spacing:0.02em; line-height:0.95; margin:0.4rem 0; }
+  .card .sub { font-family:var(--mono); font-size:0.66rem; letter-spacing:0.24em; text-transform:uppercase; opacity:0.85; }
+  .card .store { margin-top:1.1rem; font-family:var(--mono); font-size:0.66rem; letter-spacing:0.14em; text-transform:uppercase; color:#d98a5f; }
+  @media (prefers-reduced-motion: no-preference) {
+    .slide.active .cap, .slide.active .word { animation:capin .8s .3s ease both; }
+    .slide.active .sub { animation:capin .8s .55s ease both; } .slide.active .store { animation:capin .8s .9s ease both; }
+    @keyframes capin { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:none; } }
+  }
+  .ticks { position:absolute; top:3.5%; left:6%; right:6%; display:flex; gap:5px; z-index:2; }
+  .ticks i { flex:1; height:2px; background:rgba(231,223,206,0.28); border-radius:2px; }
+  .ticks i.done { background:var(--brass); }
+
+  /* standfirst */
+  .standfirst { max-width:62ch; margin:clamp(1.4rem,4vw,2.2rem) auto 0; }
+  .standfirst p { margin:0 0 1rem; }
+  .standfirst p:first-of-type::first-letter { font-family:var(--serif); font-weight:800; float:left; font-size:3.6rem; line-height:0.72; padding:0.06em 0.12em 0 0; color:var(--oxblood); }
+
+  /* morse divider */
+  .morse-rule { text-align:center; padding:clamp(1.4rem,4vw,2.2rem) 0; }
+  .morse-rule .code { font-family:var(--mono); color:var(--brass); font-size:1.05rem; letter-spacing:0.15em; }
+  .morse-rule .code span { margin:0 0.5em; }
+
+  /* dispatches */
+  .section-rule { border-top:3px double var(--ink); padding-top:0.5rem; }
+  .dispatches { display:grid; grid-template-columns:repeat(auto-fit, minmax(15rem,1fr)); margin-top:0.4rem; }
+  .col { padding:1.3rem clamp(0.9rem,2.2vw,1.6rem); border-top:1px solid var(--rule); }
+  .col + .col { border-left:1px solid var(--rule); }
+  .col h3 { font-family:var(--serif); font-weight:700; font-size:1.3rem; margin:0.5rem 0 0.4rem; text-wrap:balance; }
+  .col p { margin:0; color:var(--ink-soft); font-size:1rem; }
+  .col .num { font-family:var(--mono); color:var(--oxblood); font-size:0.72rem; letter-spacing:0.2em; }
+
+  /* gallery plates (the same 5 shots, larger) */
+  .plates { display:grid; grid-template-columns:repeat(auto-fit, minmax(9.5rem,1fr)); gap:clamp(0.8rem,2.5vw,1.3rem); margin-top:1.4rem; }
+  .plate { position:relative; aspect-ratio:9/19; border-radius:7px; overflow:hidden; border:1px solid var(--rule); background:var(--paper-2); }
+  .plate .shot { border-radius:0; }
+  .plate .ph { color:var(--brass); }
+
+  /* colophon + footer */
+  .colophon { max-width:58ch; margin:clamp(2rem,6vw,3.2rem) auto 0; text-align:center; }
+  .colophon p { color:var(--ink-soft); }
+  footer { border-top:1px solid var(--ink); margin-top:clamp(2.4rem,6vw,3.5rem); padding:1.2rem 0 0.4rem; }
+  .foot-line { display:flex; gap:1.2rem; justify-content:center; flex-wrap:wrap; font-family:var(--mono); font-size:0.66rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--ink-soft); }
+  .foot-line a { color:var(--ink-soft); text-decoration:none; }
+  .foot-line a:hover { color:var(--oxblood); }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <header class="nameplate">
+    <div class="ears"><span>Vol. I · No. 1</span><span>Established MCMI</span><span>Price — $2.99</span></div>
+    <h1 class="masthead">Dominion</h1>
+    <div class="dateline"><span>Toronto, the Dominion of Canada</span><span>·</span><span>A Newspaper Mystery</span><span>·</span><span><b>For iPhone</b></span></div>
+  </header>
+
+  <section class="hero">
+    <!-- the motion reel -->
+    <div class="stage" id="stage" aria-label="Dominion promo reel">
+      <div class="ticks" id="ticks"></div>
+      <div class="slide card"><div><div class="morse">–·· –––&nbsp;·&nbsp;·· –· ·· ––– –·</div><div class="word">Dominion</div><div class="sub">Toronto · 1901</div></div></div>
+      <div class="slide"><div class="shot" data-shot="morse"></div><div class="ph">the Morse decode<br>— shots/morse.jpg —</div><div class="scrim"></div><div class="cap"><div class="eyebrow">The wire</div><div class="line">Read the news in real Morse.</div></div></div>
+      <div class="slide"><div class="shot" data-shot="interview"></div><div class="ph">an interview<br>— shots/interview.jpg —</div><div class="scrim"></div><div class="cap"><div class="eyebrow">The beat</div><div class="line">Chase 1901's real stories.</div></div></div>
+      <div class="slide"><div class="shot" data-shot="corkboard"></div><div class="ph">the corkboard<br>— shots/corkboard.jpg —</div><div class="scrim"></div><div class="cap"><div class="eyebrow">The case</div><div class="line">Pin the leads. Break the story.</div></div></div>
+      <div class="slide"><div class="shot" data-shot="choice"></div><div class="ph">the choice<br>— shots/choice.jpg —</div><div class="scrim"></div><div class="cap"><div class="eyebrow">The choice</div><div class="line">Print the scoop — or the truth.</div></div></div>
+      <div class="slide card"><div><div class="word">Dominion</div><div class="sub">A 1901 newspaper mystery</div><div class="store">Coming to the App Store</div></div></div>
+    </div>
+
+    <div class="pitch">
+      <p class="label kicker">The Lead Story</p>
+      <h2 class="headline">You are a correspondent in 1901. File the truth — by wire.</h2>
+      <p class="deck">Chase the year's real stories, decode them in real Morse, and choose what the paper prints: the scoop, or the truth.</p>
+      <div class="cta">
+        <!-- EDIT: your App Store link when live -->
+        <a class="btn btn-primary" href="#app-store">Read it on the App&nbsp;Store →</a>
+        <!-- EDIT: your email -->
+        <a class="btn btn-ghost" href="mailto:hello@johnmacgillis.ca?subject=Dominion%20—%20wire%20me%20at%20launch">Wire me at launch</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="standfirst">
+    <p>The wire runs from Halifax to the Pacific, and down it runs the news. You have come to Toronto with a letter of introduction and a single ambition — to become a great reporter at <em>The Globe</em>. What you file, and what you refuse to, is up to you.</p>
+    <p>Queen Victoria is dying at Osborne House. A president will be shot in Buffalo. A wireless signal is about to cross the Atlantic for the first time. You will cover all of it — and learn to read the sounder yourself, dot by dot.</p>
+  </div>
+
+  <div class="morse-rule" aria-hidden="true">
+    <div class="code"><span>–··</span><span>–––</span><span>––</span><span>··</span><span>–·</span><span>··</span><span>–––</span><span>–·</span></div>
+    <span class="label">· – · &nbsp; in Morse: “Dominion” &nbsp; · – ·</span>
+  </div>
+
+  <section class="section-rule">
+    <p class="label" style="text-align:center; padding-bottom:0.3rem;">What the job asks of you</p>
+    <div class="dispatches">
+      <div class="col"><span class="num">— i —</span><h3>Read the sounder</h3><p>Real International Morse, taught dot by dot. By the end you'll copy a cable off the wire yourself.</p></div>
+      <div class="col"><span class="num">— ii —</span><h3>Cover 1901, as it happened</h3><p>The Queen's death, the McKinley shooting, Marconi's first signal — real events, on the real dates.</p></div>
+      <div class="col"><span class="num">— iii —</span><h3>The scoop or the truth</h3><p>Every dispatch is a choice. Print fast and loose, or stand the story up — the desk is watching.</p></div>
+      <div class="col"><span class="num">— iv —</span><h3>Work the corkboard</h3><p>Pin the leads, chase the thread, and find the story the powerful would rather you didn't.</p></div>
+    </div>
+  </section>
+
+  <section style="margin-top:clamp(2rem,6vw,3rem);">
+    <p class="label" style="text-align:center;">From the field</p>
+    <div class="plates">
+      <div class="plate"><div class="shot" data-shot="morse"></div><div class="ph">morse.jpg</div></div>
+      <div class="plate"><div class="shot" data-shot="interview"></div><div class="ph">interview.jpg</div></div>
+      <div class="plate"><div class="shot" data-shot="corkboard"></div><div class="ph">corkboard.jpg</div></div>
+      <div class="plate"><div class="shot" data-shot="scene"></div><div class="ph">scene.jpg</div></div>
+      <div class="plate"><div class="shot" data-shot="choice"></div><div class="ph">choice.jpg</div></div>
+    </div>
+  </section>
+
+  <section class="colophon">
+    <p class="label">The colophon</p>
+    <p><em>Dominion</em> is an independent game written and built by John MacGillis in Nova Scotia — real history, real Morse, no ads, no tricks. It keeps nothing about you: your progress lives only on your own device.</p>
+    <div class="cta" style="justify-content:center; margin-top:1.1rem;"><a class="btn btn-primary" href="#app-store">Read it on the App&nbsp;Store →</a></div>
+  </section>
+
+  <footer>
+    <div class="foot-line">
+      <span>© MCMI — MMXXVI</span>
+      <a href="mailto:hello@johnmacgillis.ca">Contact</a>
+      <a href="https://johnmacgillis.ca">johnmacgillis.ca</a>
+      <span>Set in Toronto · Sent by wire</span>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  // Fill each .shot from /dominion/shots/<name>.jpg; if the file is missing, the
+  // styled placeholder shows through instead of a broken image.
+  document.querySelectorAll('.shot[data-shot]').forEach(function (el) {
+    var name = el.getAttribute('data-shot');
+    var img = new Image();
+    img.onload = function () { el.style.backgroundImage = "url('shots/" + name + ".jpg')"; el.classList.add('filled'); };
+    img.src = "shots/" + name + ".jpg";
+  });
+
+  // The reel: crossfade slides on a timeline.
+  (function () {
+    var slides = Array.prototype.slice.call(document.querySelectorAll('#stage .slide'));
+    var ticksWrap = document.getElementById('ticks');
+    slides.forEach(function () { ticksWrap.appendChild(document.createElement('i')); });
+    var ticks = Array.prototype.slice.call(ticksWrap.children);
+    var idx = 0;
+    function show(n) { slides.forEach(function (s, k) { s.classList.toggle('active', k === n); }); ticks.forEach(function (t, k) { t.classList.toggle('done', k <= n); }); }
+    show(0);
+    setInterval(function () { idx = (idx + 1) % slides.length; show(idx); }, 3200);
+  })();
+</script>
+</body>
+</html>
