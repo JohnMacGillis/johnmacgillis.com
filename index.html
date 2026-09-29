@@ -3,8 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>John MacGillis</title>
-    <meta name="description" content="I build tools that make public data useful. Civic tech, open data, access to justice.">
+    <title>John MacGillis — Marketing Consultant, Halifax</title>
+    <meta name="description" content="Marketing consultant in Halifax, Nova Scotia. Growth strategy, performance media, in-house creative and the measurement to prove what's working.">
+    <meta property="og:title" content="John MacGillis — Marketing Consultant">
+    <meta property="og:description" content="Growth strategy, performance media, in-house creative and the measurement to prove what's working.">
+    <meta property="og:image" content="https://johnmacgillis.ca/Headshot.jpg">
+    <meta property="og:url" content="https://johnmacgillis.ca/">
+    <meta property="og:type" content="website">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Newsreader:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
@@ -183,6 +188,59 @@
         .btn-secondary { font-size: 0.8rem; font-weight: 500; color: #aaa; text-decoration: none; transition: color 0.2s; }
         .btn-secondary:hover { color: #1a1a1a; }
 
+        .availability {
+            display: inline-flex; align-items: center; gap: 0.45rem;
+            font-size: 0.72rem; font-weight: 600; color: #16803c;
+            background: rgba(236,253,243,0.8); border: 1px solid rgba(187,247,208,0.6);
+            padding: 0.28rem 0.8rem; border-radius: 100px; margin-bottom: 0.9rem;
+        }
+        .availability::before {
+            content: ""; width: 6px; height: 6px; border-radius: 50%; background: #16a34a;
+        }
+        .hero-cta { margin-top: 1.5rem; display: flex; align-items: center; gap: 1.25rem; }
+
+        /* ---- NUMBERS ---- */
+        .numbers {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem;
+        }
+        .number {
+            background: rgba(255,255,255,0.5);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.45);
+            border-radius: 16px; padding: 1.4rem 1.25rem;
+        }
+        .number strong {
+            display: block; font-size: 1.6rem; font-weight: 700; color: #111;
+            letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 0.35rem;
+        }
+        .number span { font-size: 0.78rem; color: #888; line-height: 1.45; display: block; }
+
+        /* ---- SERVICES ---- */
+        .project ul { list-style: none; margin-bottom: 0.25rem; }
+        .project li {
+            color: #777; font-size: 0.84rem; line-height: 1.55;
+            padding-left: 1rem; position: relative; margin-bottom: 0.35rem;
+        }
+        .project li::before { content: "—"; position: absolute; left: 0; color: #ccc; }
+
+        /* ---- EXPERIENCE ---- */
+        .timeline { display: flex; flex-direction: column; }
+        .role {
+            display: grid; grid-template-columns: 170px 1fr; gap: 1.5rem;
+            padding: 1.5rem 0; border-top: 1px solid rgba(0,0,0,0.06);
+        }
+        .role:first-child { border-top: none; padding-top: 0; }
+        .role-when { font-size: 0.75rem; color: #aaa; font-weight: 500; padding-top: 0.2rem; }
+        .role h3 { font-size: 1rem; font-weight: 650; color: #1a1a1a; letter-spacing: -0.02em; }
+        .role .role-org { font-size: 0.82rem; color: #999; margin-bottom: 0.6rem; }
+        .role p { color: #777; font-size: 0.86rem; line-height: 1.65; }
+        .role ul { list-style: none; }
+        .role li {
+            color: #777; font-size: 0.86rem; line-height: 1.6;
+            padding-left: 1rem; position: relative; margin-bottom: 0.3rem;
+        }
+        .role li::before { content: "—"; position: absolute; left: 0; color: #ccc; }
+
         /* ---- ABOUT ---- */
         .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
         .about-col h3 { font-size: 0.85rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.6rem; letter-spacing: -0.01em; }
@@ -221,6 +279,13 @@
             .project-header { flex-direction: column; gap: 0.4rem; }
             .project-status { margin-left: 0; }
             .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .numbers { grid-template-columns: 1fr 1fr; }
+            .number strong { font-size: 1.3rem; }
+            .role { grid-template-columns: 1fr; gap: 0.35rem; }
+            .nav-name { display: none; }
+            .nav-links { gap: 1.1rem; }
+            .hero-cta { flex-wrap: wrap; }
+            .btn-primary, .btn-secondary { white-space: nowrap; }
             .contact-inner { padding: 1.75rem; border-radius: 14px; }
             .contact-links { flex-direction: column; gap: 0.6rem; }
         }
@@ -348,7 +413,8 @@
         <div class="container">
             <span class="nav-name">John MacGillis</span>
             <div class="nav-links">
-                <a href="#projects">Projects</a>
+                <a href="#services">Services</a>
+                <a href="#experience">Experience</a>
                 <a href="#about">About</a>
                 <a href="#contact">Contact</a>
             </div>
@@ -360,14 +426,13 @@
             <div class="hero-inner">
                 <img src="Headshot.jpg" alt="John MacGillis" class="hero-photo">
                 <div class="hero-text">
-                    <p class="hero-name">John MacGillis</p>
-                    <h1>I build tools that make public data useful.</h1>
-                    <p class="hero-sub">Nova Scotia's court decisions, legislative debates, and docket schedules — indexed, searchable, and free.</p>
-                    <div class="hero-meta">
-                        <span class="tag">Director of Growth</span>
-                        <span class="tag">NSBS Council</span>
-                        <span class="tag">Journalist</span>
-                        <span class="tag">Builder</span>
+                    <span class="availability">Available for consulting</span>
+                    <p class="hero-name">John MacGillis &middot; Marketing Consultant</p>
+                    <h1>Marketing that answers to revenue.</h1>
+                    <p class="hero-sub">I help organizations turn media spend into clients: growth strategy, performance media, in-house creative, and the data and automation to show what's working.</p>
+                    <div class="hero-cta">
+                        <a href="mailto:john@johnmacgillis.ca?subject=Marketing%20consulting" class="btn-primary">Start a conversation &rarr;</a>
+                        <a href="#experience" class="btn-secondary">See my experience</a>
                     </div>
                 </div>
             </div>
@@ -377,47 +442,39 @@
     <section class="thesis">
         <div class="container">
             <div class="thesis-inner">
-                <blockquote>Bad design is not neutral. It protects the institutions that can afford to ignore it, and punishes everyone else.</blockquote>
-                <p class="thesis-body">When a court docket is an Oracle-generated PDF emailed to a mailing list, or 30 years of legislative debate is buried in early-2000s HTML, or case law sits behind a paywall — the friction is the point. Public records that the public can't actually use aren't public in any way that matters.</p>
+                <blockquote>Most marketing budgets can't tell you which dollar brought in which client. That's the first thing I fix.</blockquote>
+                <p class="thesis-body">At a personal injury firm operating in four Atlantic provinces, I tied paid search, streaming, television, radio and social back to lead source, cost per acquisition and case value, so the budget went where the cases actually came from. Then we built the creative studio and the internal tools to do more of it, in-house.</p>
             </div>
         </div>
     </section>
 
-    <section id="projects">
+    <section class="numbers-section" style="padding-top: 0;">
         <div class="container">
-            <div class="section-label">Projects</div>
+            <div class="numbers">
+                <div class="number"><strong>$600K</strong><span>monthly media spend managed</span></div>
+                <div class="number"><strong>4</strong><span>provinces across Atlantic Canada</span></div>
+                <div class="number"><strong>Broadcast</strong><span>standard creative, produced in-house</span></div>
+                <div class="number"><strong>7</strong><span>person team led across marketing, dev &amp; ops</span></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services">
+        <div class="container">
+            <div class="section-label">How I can help</div>
 
             <div class="bento">
 
                 <div class="project project-featured">
                     <div>
                         <div class="project-header">
-                            <h3>NS Legal Research</h3>
-                            <span class="project-status status-live">Live</span>
+                            <h3>Growth strategy &amp; marketing audits</h3>
                         </div>
-                        <p>Free AI-powered legal research platform for Nova Scotia lawyers. A public alternative to commercial tools that every lawyer in the province can use, regardless of firm size or budget.</p>
+                        <p>An outside look at where your marketing money goes and what it returns. I map spend to leads, leads to clients, and clients to revenue, then give you a plan for what to cut, what to scale and what to measure next.</p>
                         <div class="project-stats">
-                            <span class="stat"><strong>17,000+</strong> court decisions</span>
-                            <span class="stat"><strong>8</strong> research tools</span>
-                            <span class="stat"><strong>AI-powered</strong> semantic search + citation graph</span>
-                        </div>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://seahorse-app-6b8lk.ondigitalocean.app" class="btn-primary" target="_blank">Try the platform &rarr;</a>
-                        <a href="https://github.com/JohnMacGillis/ns-legal-research" class="btn-secondary" target="_blank">Source code</a>
-                    </div>
-                </div>
-
-                <div class="project project-small">
-                    <div>
-                        <div class="project-header">
-                            <h3>Court Docket Tracker</h3>
-                            <span class="project-status status-soon">Coming soon</span>
-                        </div>
-                        <p>Searchable index of NS court schedules. Party names, lawyers, matter types, self-representation tracking.</p>
-                        <div class="project-stats">
-                            <span class="stat"><strong>All NS courts</strong> unified</span>
-                            <span class="stat"><strong>Alerts</strong> by party or lawyer</span>
+                            <span class="stat"><strong>Channel mix</strong> review</span>
+                            <span class="stat"><strong>Cost per acquisition</strong> by source</span>
+                            <span class="stat"><strong>Budget</strong> reallocation plan</span>
                         </div>
                     </div>
                 </div>
@@ -425,18 +482,124 @@
                 <div class="project project-small">
                     <div>
                         <div class="project-header">
-                            <h3>NS Hansard Search</h3>
-                            <span class="project-status status-live">Live</span>
+                            <h3>Performance media</h3>
                         </div>
-                        <p>What does your MLA actually do? Search 1.7M words of legislative debate. MLA report cards, quality scoring, absurdity flags.</p>
-                        <div class="project-stats">
-                            <span class="stat"><strong>52</strong> MLAs graded</span>
-                            <span class="stat"><strong>5,400+</strong> speeches scored</span>
-                        </div>
+                        <ul>
+                            <li>Paid search, paid social and SEO</li>
+                            <li>Streaming and CTV, including Amazon DSP and Netflix</li>
+                            <li>Radio and television buys</li>
+                            <li>Reporting on lead source, CPA and client value</li>
+                        </ul>
                     </div>
-                    <div class="project-links">
-                        <a href="https://jellyfish-app-spafj.ondigitalocean.app" class="btn-primary" target="_blank">Try it &rarr;</a>
-                        <a href="https://github.com/JohnMacGillis/ns-hansard" class="btn-secondary" target="_blank">Source code</a>
+                </div>
+
+                <div class="project project-small">
+                    <div>
+                        <div class="project-header">
+                            <h3>In-house creative</h3>
+                        </div>
+                        <ul>
+                            <li>Standing up an in-house creative team</li>
+                            <li>Scriptwriting for broadcast and streaming ads</li>
+                            <li>Directing in-house and external cinematographers</li>
+                            <li>Broadcast-quality output without agency overhead</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="project project-small">
+                    <div>
+                        <div class="project-header">
+                            <h3>Marketing automation &amp; AI</h3>
+                        </div>
+                        <ul>
+                            <li>Lead tracking and attribution that holds up</li>
+                            <li>Automating intake and follow-up work</li>
+                            <li>Practical AI tools your team will actually use</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="project project-small">
+                    <div>
+                        <div class="project-header">
+                            <h3>Communications &amp; media relations</h3>
+                        </div>
+                        <ul>
+                            <li>Media relations for high-profile matters</li>
+                            <li>Websites, newsletters and social channels</li>
+                            <li>Reports and briefings for boards and regulators</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="experience">
+        <div class="container">
+            <div class="section-label">Experience</div>
+            <div class="timeline">
+
+                <div class="role">
+                    <div class="role-when">Aug 2025 &ndash; Oct 2026</div>
+                    <div>
+                        <h3>Director of Growth</h3>
+                        <p class="role-org">MacGillivray Injury and Insurance Law &middot; Halifax</p>
+                        <ul>
+                            <li>Led growth strategy across performance marketing, analytics, software development and data engineering for a firm operating in four Atlantic provinces.</li>
+                            <li>Managed a 7-person team spanning IT, software development, marketing and operations.</li>
+                            <li>Built an AI workspace and automations for filings, demand letters and records requests, freeing staff for client-facing work.</li>
+                            <li>Managed media relations on high-profile class action lawsuits.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="role">
+                    <div class="role-when">Nov 2024 &ndash; Aug 2025</div>
+                    <div>
+                        <h3>Director of Marketing</h3>
+                        <p class="role-org">MacGillivray Injury and Insurance Law &middot; Halifax</p>
+                        <ul>
+                            <li>Managed $600K/month in media across paid search, Amazon DSP streaming, Netflix direct insertion, radio, social and television.</li>
+                            <li>Negotiated with Netflix Canada to secure an exclusivity arrangement for the firm in the Atlantic Canada personal injury market.</li>
+                            <li>Led a 5-person creative team producing all content in-house to a broadcast standard.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="role">
+                    <div class="role-when">Nov 2023 &ndash; Nov 2024</div>
+                    <div>
+                        <h3>Digital Marketing Strategist</h3>
+                        <p class="role-org">MacGillivray Injury and Insurance Law &middot; Halifax</p>
+                        <ul>
+                            <li>Ran paid search, paid social and SEO across Atlantic Canada, reporting on lead source, cost per acquisition and case value to guide budget.</li>
+                            <li>Wrote scripts and worked with cinematographers to produce broadcast-quality advertising.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="role">
+                    <div class="role-when">May 2022 &ndash; Nov 2023</div>
+                    <div>
+                        <h3>Projects Advisor &middot; Communications Advisor</h3>
+                        <p class="role-org">Nova Scotia Barristers' Society &middot; Halifax</p>
+                        <ul>
+                            <li>Sole communicator for the provincial legal regulator: website, social media and monthly newsletter.</li>
+                            <li>Supported 25+ committees and Council with reports on discipline, equity and technology.</li>
+                            <li>Planned the launch of an innovation sandbox and moved complaints intake from paper to digital.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="role">
+                    <div class="role-when">2017 &ndash; 2023</div>
+                    <div>
+                        <h3>Carleton University</h3>
+                        <p class="role-org">Master of Journalism &middot; Bachelor of Journalism, Minor in Business</p>
+                        <p>Teaching assistant in advanced photojournalism and audio journalism.</p>
                     </div>
                 </div>
 
@@ -450,13 +613,13 @@
             <div class="about-grid">
                 <div class="about-col">
                     <h3>Background</h3>
-                    <p>I trained as a journalist at Carleton University and have written for The Walrus and Financial Post. I spent two years inside the Nova Scotia Barristers' Society working across communications, process automation, and regulatory modernization with teams across the organization.</p>
-                    <p>Now I work at a regional law firm, where I split my time between growth strategy and building internal tools — workflow automation, document generation, and system integrations that replaced most of the manual work across the practice.</p>
+                    <p>I trained as a journalist at Carleton University and have written for The Walrus and Financial Post. That's where I learned to write a script, frame a shot and get to the point.</p>
+                    <p>I spent the last three years at a regional law firm, starting on paid search and ending up running growth. That meant the media budget, the creative team and the software behind it.</p>
                 </div>
                 <div class="about-col">
-                    <h3>What drives this work</h3>
-                    <p>I spent enough time inside institutions — a legal regulator, a law firm, newsrooms — to see how information asymmetry works in practice. The data exists. The interfaces don't.</p>
-                    <p>Someone looking up whether their landlord has been sued before shouldn't need a Westlaw subscription. A journalist covering the legislature shouldn't have to read HTML from 2003. The problem isn't access — it's design.</p>
+                    <h3>How I work</h3>
+                    <p>I'm most useful to organizations spending real money on marketing without a clear line from spend to results. Professional services, regulated industries, and anyone trying to bring agency work in-house.</p>
+                    <p>I'm based in Halifax and work across Atlantic Canada and remotely. I also build software on the side, including <a href="https://seahorse-app-6b8lk.ondigitalocean.app" target="_blank" style="color:#444;">NS Legal Research</a> and <a href="https://jellyfish-app-spafj.ondigitalocean.app" target="_blank" style="color:#444;">NS Hansard Search</a>, so the data and automation side isn't a handoff.</p>
                 </div>
             </div>
         </div>
@@ -465,11 +628,11 @@
     <section id="contact" class="contact">
         <div class="container">
             <div class="contact-inner">
-                <p>I'm interested in open data, civic tech, access to justice, and legal technology. If you're working on something in that space, I'd like to hear about it.</p>
+                <p>Want an outside look at your marketing, or help building it in-house? Let's talk.</p>
                 <div class="contact-links">
-                    <a href="mailto:john@johnmacgillis.ca">Email</a>
-                    <a href="https://github.com/JohnMacGillis" target="_blank">GitHub</a>
+                    <a href="mailto:john@johnmacgillis.ca?subject=Marketing%20consulting">john@johnmacgillis.ca</a>
                     <a href="https://www.linkedin.com/in/john-macgillis-073236158/" target="_blank">LinkedIn</a>
+                    <a href="https://github.com/JohnMacGillis" target="_blank">GitHub</a>
                 </div>
             </div>
         </div>
@@ -477,7 +640,7 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2026 John MacGillis</p>
+            <p>&copy; 2026 John MacGillis &middot; Halifax, Nova Scotia</p>
         </div>
     </footer>
     </div><!-- end content-frame -->
