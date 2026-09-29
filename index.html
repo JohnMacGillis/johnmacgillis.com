@@ -3,636 +3,185 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>John MacGillis — Marketing Consultant, Halifax</title>
-    <meta name="description" content="Marketing consultant in Halifax, Nova Scotia. Growth strategy, performance media, in-house creative and the measurement to prove what's working.">
+    <title>John MacGillis — Marketing Consultant</title>
+    <meta name="description" content="Marketing consultant in Halifax, Nova Scotia. Growth strategy, performance media, creative production and marketing measurement.">
     <meta property="og:title" content="John MacGillis — Marketing Consultant">
-    <meta property="og:description" content="Growth strategy, performance media, in-house creative and the measurement to prove what's working.">
+    <meta property="og:description" content="Growth strategy, performance media, creative production and marketing measurement.">
     <meta property="og:image" content="https://johnmacgillis.ca/Headshot.jpg">
     <meta property="og:url" content="https://johnmacgillis.ca/">
     <meta property="og:type" content="website">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Newsreader:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            background: #f8f7f4;
-            color: #3a3a3a;
+            background: #fff;
+            color: #333;
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            line-height: 1.6;
             font-size: 1rem;
+            line-height: 1.65;
             -webkit-font-smoothing: antialiased;
-            position: relative;
-            overflow-x: hidden;
         }
 
-        /* ---- GEOMETRIC DATA BACKGROUND ---- */
-        .geo-bg {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            z-index: 0;
-            pointer-events: none;
-            overflow: hidden;
-        }
+        .container { max-width: 720px; margin: 0 auto; padding: 0 1.5rem; }
 
-        .geo-bg svg {
-            width: 100%;
-            height: 100%;
-        }
+        a { color: #111; }
 
-        .container {
-            max-width: 820px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            position: relative;
-            z-index: 1;
-        }
+        /* ---- HEADER ---- */
+        header { padding: 5rem 0 3rem; border-bottom: 1px solid #eee; }
+        .intro { display: flex; align-items: center; gap: 2rem; }
+        .photo { width: 112px; height: 112px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+        h1 { font-size: 2rem; font-weight: 600; color: #111; letter-spacing: -0.02em; line-height: 1.2; }
+        .title { font-size: 1.05rem; color: #666; margin-top: 0.25rem; }
+        .links { margin-top: 0.9rem; display: flex; flex-wrap: wrap; gap: 0.4rem 1.25rem; font-size: 0.9rem; }
+        .links a { color: #111; text-decoration: none; border-bottom: 1px solid #ccc; }
+        .links a:hover { border-color: #111; }
 
-        /* Content backdrop — lets geometry show through but keeps text readable */
-        .content-frame {
-            max-width: 920px;
-            margin: 0 auto;
-            background: rgba(248, 247, 244, 0.82);
-            backdrop-filter: blur(6px);
-            -webkit-backdrop-filter: blur(6px);
-            border-left: 1px solid rgba(255,255,255,0.5);
-            border-right: 1px solid rgba(255,255,255,0.5);
-            position: relative;
-            z-index: 1;
+        /* ---- SECTIONS ---- */
+        section { padding: 3rem 0; border-bottom: 1px solid #eee; }
+        h2 {
+            font-size: 0.75rem; font-weight: 600; color: #999;
+            text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1.5rem;
         }
-
-        /* ---- NAV ---- */
-        nav {
-            padding: 1rem 0;
-            background: rgba(248, 247, 244, 0.5);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(0,0,0,0.04);
-            position: sticky;
-            top: 0;
-            z-index: 20;
-        }
-        nav .container { display: flex; justify-content: space-between; align-items: center; }
-        .nav-name { font-size: 0.82rem; font-weight: 600; color: #1a1a1a; letter-spacing: -0.01em; }
-        .nav-links { display: flex; gap: 1.75rem; }
-        .nav-links a { color: #999; text-decoration: none; font-size: 0.8rem; font-weight: 500; transition: color 0.2s; }
-        .nav-links a:hover { color: #1a1a1a; }
-
-        /* ---- HERO ---- */
-        .hero { padding: 5rem 0 4rem; position: relative; z-index: 1; }
-        .hero-inner { display: flex; align-items: center; gap: 3.5rem; }
-        .hero-photo {
-            width: 160px; height: 160px;
-            border-radius: 50%; object-fit: cover; flex-shrink: 0;
-            box-shadow: 0 6px 30px rgba(0,0,0,0.07);
-            border: 3px solid rgba(255,255,255,0.8);
-        }
-        .hero-name {
-            font-size: 0.82rem; font-weight: 500; color: #999;
-            letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 0.6rem;
-        }
-        .hero-text h1 {
-            font-size: 3rem; font-weight: 700; color: #111;
-            letter-spacing: -0.045em; line-height: 1.05; margin-bottom: 1rem;
-        }
-        .hero-text .hero-sub {
-            font-size: 1rem; color: #888; max-width: 460px; line-height: 1.6;
-        }
-        .hero-meta { margin-top: 1.5rem; display: flex; flex-wrap: wrap; gap: 0.35rem; }
-        .tag {
-            font-size: 0.68rem; font-weight: 500; color: #777;
-            background: rgba(255,255,255,0.55); backdrop-filter: blur(8px);
-            border: 1px solid rgba(0,0,0,0.05);
-            padding: 0.28rem 0.8rem; border-radius: 100px; letter-spacing: 0.02em;
-        }
-
-        /* ---- THESIS ---- */
-        .thesis { padding: 1.5rem 0 3rem; position: relative; z-index: 1; }
-        .thesis-inner {
-            background: rgba(255,255,255,0.5);
-            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255,255,255,0.45);
-            border-radius: 16px; padding: 2.5rem;
-        }
-        .thesis-inner blockquote {
-            font-family: 'Newsreader', Georgia, serif;
-            font-size: 1.5rem; font-weight: 400; font-style: italic;
-            color: #222; line-height: 1.38; margin-bottom: 1.25rem; letter-spacing: -0.01em;
-        }
-        .thesis-inner .thesis-body {
-            color: #777; font-size: 0.88rem; line-height: 1.65;
-        }
-
-        /* ---- SECTION ---- */
-        section { padding: 3rem 0; position: relative; z-index: 1; }
-        .section-label {
-            font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.14em;
-            color: #bbb; margin-bottom: 1.5rem; font-weight: 600;
-        }
-
-        /* ---- BENTO PROJECTS ---- */
-        .bento {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            grid-template-rows: auto auto;
-            gap: 0.75rem;
-        }
-        .project {
-            background: rgba(255,255,255,0.5);
-            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255,255,255,0.45);
-            border-radius: 16px; padding: 2rem;
-            transition: box-shadow 0.3s ease, transform 0.3s ease, background 0.3s ease;
-            display: flex; flex-direction: column; justify-content: space-between;
-        }
-        .project:hover {
-            background: rgba(255,255,255,0.72);
-            box-shadow: 0 10px 40px rgba(0,0,0,0.05); transform: translateY(-1px);
-        }
-        .project-featured {
-            grid-column: 1 / -1;
-            padding: 2.5rem;
-        }
-        .project-featured h3 { font-size: 1.35rem; }
-        .project-featured .project-stats { gap: 2rem; }
-        .project-featured .stat { font-size: 0.82rem; }
-        .project-featured .stat strong { font-size: 1.5rem; display: block; color: #1a1a1a; margin-bottom: 0.1rem; }
-
-        .project-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.4rem; }
-        .project h3 { font-size: 1.05rem; font-weight: 650; color: #1a1a1a; letter-spacing: -0.02em; }
-        .project-status {
-            font-size: 0.6rem; font-weight: 600; padding: 0.18rem 0.55rem;
-            border-radius: 100px; flex-shrink: 0; margin-left: 1rem;
-            letter-spacing: 0.04em; text-transform: uppercase;
-        }
-        .status-live { color: #16803c; background: rgba(236,253,243,0.8); border: 1px solid rgba(187,247,208,0.6); }
-        .status-soon { color: #92400e; background: rgba(255,251,235,0.8); border: 1px solid rgba(253,230,138,0.6); }
-        .project p { color: #777; font-size: 0.88rem; line-height: 1.6; margin-bottom: 1rem; }
-        .project-small p { font-size: 0.84rem; margin-bottom: 0.75rem; }
-        .project-stats {
-            display: flex; flex-wrap: wrap; gap: 1.25rem; margin-bottom: 1.25rem;
-            padding-top: 1rem; border-top: 1px solid rgba(0,0,0,0.04);
-        }
-        .project-small .project-stats { gap: 0.75rem; }
-        .stat { font-size: 0.75rem; color: #aaa; }
-        .stat strong { color: #444; font-weight: 600; }
-        .project-links { display: flex; align-items: center; gap: 1rem; margin-top: auto; }
-        .btn-primary {
-            display: inline-block; font-size: 0.8rem; font-weight: 600; color: #fff;
-            background: #111; padding: 0.5rem 1.25rem; border-radius: 8px;
-            text-decoration: none; transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
-        }
-        .btn-primary:hover { background: #222; transform: translateY(-0.5px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-        .btn-secondary { font-size: 0.8rem; font-weight: 500; color: #aaa; text-decoration: none; transition: color 0.2s; }
-        .btn-secondary:hover { color: #1a1a1a; }
-
-        .availability {
-            display: inline-flex; align-items: center; gap: 0.45rem;
-            font-size: 0.72rem; font-weight: 600; color: #16803c;
-            background: rgba(236,253,243,0.8); border: 1px solid rgba(187,247,208,0.6);
-            padding: 0.28rem 0.8rem; border-radius: 100px; margin-bottom: 0.9rem;
-        }
-        .availability::before {
-            content: ""; width: 6px; height: 6px; border-radius: 50%; background: #16a34a;
-        }
-        .hero-cta { margin-top: 1.5rem; display: flex; align-items: center; gap: 1.25rem; }
-
-        /* ---- NUMBERS ---- */
-        .numbers {
-            display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem;
-        }
-        .number {
-            background: rgba(255,255,255,0.5);
-            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255,255,255,0.45);
-            border-radius: 16px; padding: 1.4rem 1.25rem;
-        }
-        .number strong {
-            display: block; font-size: 1.6rem; font-weight: 700; color: #111;
-            letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 0.35rem;
-        }
-        .number span { font-size: 0.78rem; color: #888; line-height: 1.45; display: block; }
+        .lead { font-size: 1.15rem; color: #222; line-height: 1.6; }
+        p + p { margin-top: 1rem; }
 
         /* ---- SERVICES ---- */
-        .project ul { list-style: none; margin-bottom: 0.25rem; }
-        .project li {
-            color: #777; font-size: 0.84rem; line-height: 1.55;
-            padding-left: 1rem; position: relative; margin-bottom: 0.35rem;
-        }
-        .project li::before { content: "—"; position: absolute; left: 0; color: #ccc; }
+        .services { display: grid; grid-template-columns: 1fr 1fr; gap: 1.75rem 2.5rem; }
+        .services h3 { font-size: 1rem; font-weight: 600; color: #111; margin-bottom: 0.3rem; }
+        .services p { font-size: 0.92rem; color: #666; }
 
         /* ---- EXPERIENCE ---- */
-        .timeline { display: flex; flex-direction: column; }
-        .role {
-            display: grid; grid-template-columns: 170px 1fr; gap: 1.5rem;
-            padding: 1.5rem 0; border-top: 1px solid rgba(0,0,0,0.06);
-        }
-        .role:first-child { border-top: none; padding-top: 0; }
-        .role-when { font-size: 0.75rem; color: #aaa; font-weight: 500; padding-top: 0.2rem; }
-        .role h3 { font-size: 1rem; font-weight: 650; color: #1a1a1a; letter-spacing: -0.02em; }
-        .role .role-org { font-size: 0.82rem; color: #999; margin-bottom: 0.6rem; }
-        .role p { color: #777; font-size: 0.86rem; line-height: 1.65; }
-        .role ul { list-style: none; }
-        .role li {
-            color: #777; font-size: 0.86rem; line-height: 1.6;
-            padding-left: 1rem; position: relative; margin-bottom: 0.3rem;
-        }
-        .role li::before { content: "—"; position: absolute; left: 0; color: #ccc; }
-
-        /* ---- ABOUT ---- */
-        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
-        .about-col h3 { font-size: 0.85rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.6rem; letter-spacing: -0.01em; }
-        .about-col p { color: #777; font-size: 0.88rem; line-height: 1.7; margin-bottom: 0.6rem; }
-        .about-col p:last-child { margin-bottom: 0; }
-
-        /* ---- CONTACT ---- */
-        .contact { padding: 2.5rem 0 3rem; position: relative; z-index: 1; }
-        .contact-inner {
-            background: rgba(255,255,255,0.5); backdrop-filter: blur(20px);
-            border: 1px solid rgba(255,255,255,0.45);
-            border-radius: 16px; padding: 2.5rem; text-align: center;
-        }
-        .contact-inner p { color: #777; font-size: 0.95rem; margin-bottom: 1.25rem; }
-        .contact-links { display: flex; justify-content: center; gap: 1.5rem; }
-        .contact-links a {
-            color: #1a1a1a; text-decoration: none; font-size: 0.85rem; font-weight: 500;
-            padding-bottom: 2px; border-bottom: 1px solid #ddd; transition: border-color 0.2s;
-        }
-        .contact-links a:hover { border-color: #1a1a1a; }
+        .role { display: grid; grid-template-columns: 150px 1fr; gap: 1.5rem; }
+        .role + .role { margin-top: 2rem; }
+        .when { font-size: 0.85rem; color: #999; padding-top: 0.1rem; }
+        .role h3 { font-size: 1rem; font-weight: 600; color: #111; }
+        .org { font-size: 0.92rem; color: #666; margin-bottom: 0.5rem; }
+        .role ul { padding-left: 1.1rem; }
+        .role li { font-size: 0.92rem; color: #444; margin-bottom: 0.3rem; }
 
         /* ---- FOOTER ---- */
-        footer { padding: 1.5rem 0 2rem; position: relative; z-index: 1; }
-        footer p { font-size: 0.7rem; color: #ccc; text-align: center; }
+        footer { padding: 2.5rem 0 3.5rem; font-size: 0.85rem; color: #999; }
 
-        /* ---- RESPONSIVE ---- */
-        @media (max-width: 640px) {
-            .hero { padding: 3rem 0 2rem; }
-            .hero-inner { flex-direction: column; align-items: flex-start; gap: 1.25rem; }
-            .hero-photo { width: 110px; height: 110px; }
-            .hero-text h1 { font-size: 2.1rem; }
-            .thesis-inner blockquote { font-size: 1.2rem; }
-            .bento { grid-template-columns: 1fr; }
-            .project-featured { padding: 1.75rem; }
-            .project { padding: 1.5rem; border-radius: 14px; }
-            .project-header { flex-direction: column; gap: 0.4rem; }
-            .project-status { margin-left: 0; }
-            .about-grid { grid-template-columns: 1fr; gap: 2rem; }
-            .numbers { grid-template-columns: 1fr 1fr; }
-            .number strong { font-size: 1.3rem; }
-            .role { grid-template-columns: 1fr; gap: 0.35rem; }
-            .nav-name { display: none; }
-            .nav-links { gap: 1.1rem; }
-            .hero-cta { flex-wrap: wrap; }
-            .btn-primary, .btn-secondary { white-space: nowrap; }
-            .contact-inner { padding: 1.75rem; border-radius: 14px; }
-            .contact-links { flex-direction: column; gap: 0.6rem; }
+        @media (max-width: 600px) {
+            header { padding: 3rem 0 2rem; }
+            .intro { flex-direction: column; align-items: flex-start; gap: 1.25rem; }
+            .photo { width: 88px; height: 88px; }
+            h1 { font-size: 1.6rem; }
+            .services { grid-template-columns: 1fr; gap: 1.5rem; }
+            .role { grid-template-columns: 1fr; gap: 0.25rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Geometric data visualization background -->
-    <div class="geo-bg">
-        <svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-            <defs>
-                <radialGradient id="glow1" cx="50%" cy="50%" r="50%">
-                    <stop offset="0%" stop-color="#4A90D9" stop-opacity="0.12"/>
-                    <stop offset="100%" stop-color="#4A90D9" stop-opacity="0"/>
-                </radialGradient>
-                <radialGradient id="glow2" cx="50%" cy="50%" r="50%">
-                    <stop offset="0%" stop-color="#E8854A" stop-opacity="0.1"/>
-                    <stop offset="100%" stop-color="#E8854A" stop-opacity="0"/>
-                </radialGradient>
-                <radialGradient id="glow3" cx="50%" cy="50%" r="50%">
-                    <stop offset="0%" stop-color="#4AAE8C" stop-opacity="0.1"/>
-                    <stop offset="100%" stop-color="#4AAE8C" stop-opacity="0"/>
-                </radialGradient>
-            </defs>
-
-            <!-- Ambient glows - spread across page -->
-            <ellipse cx="10%" cy="15%" rx="350" ry="280" fill="url(#glow1)"/>
-            <ellipse cx="85%" cy="10%" rx="320" ry="250" fill="url(#glow2)"/>
-            <ellipse cx="70%" cy="72%" rx="340" ry="270" fill="url(#glow3)"/>
-            <ellipse cx="20%" cy="65%" rx="250" ry="200" fill="url(#glow1)"/>
-            <ellipse cx="90%" cy="48%" rx="220" ry="180" fill="url(#glow2)"/>
-
-            <!-- Connection lines — spread across full page -->
-            <g stroke-width="0.8" fill="none" opacity="0.18">
-                <!-- Blue network - left/top -->
-                <line x1="5%" y1="8%" x2="15%" y2="20%" stroke="#4A90D9"/>
-                <line x1="15%" y1="20%" x2="8%" y2="30%" stroke="#4A90D9"/>
-                <line x1="8%" y1="30%" x2="18%" y2="38%" stroke="#4A90D9"/>
-                <line x1="15%" y1="20%" x2="25%" y2="14%" stroke="#4A90D9"/>
-                <line x1="25%" y1="14%" x2="32%" y2="26%" stroke="#4A90D9"/>
-                <line x1="18%" y1="38%" x2="30%" y2="42%" stroke="#4A90D9"/>
-                <line x1="5%" y1="8%" x2="18%" y2="6%" stroke="#4A90D9"/>
-
-                <!-- Orange network - right/top -->
-                <line x1="78%" y1="4%" x2="88%" y2="14%" stroke="#E8854A"/>
-                <line x1="88%" y1="14%" x2="95%" y2="7%" stroke="#E8854A"/>
-                <line x1="88%" y1="14%" x2="82%" y2="24%" stroke="#E8854A"/>
-                <line x1="82%" y1="24%" x2="93%" y2="30%" stroke="#E8854A"/>
-                <line x1="95%" y1="7%" x2="98%" y2="19%" stroke="#E8854A"/>
-                <line x1="98%" y1="19%" x2="93%" y2="30%" stroke="#E8854A"/>
-
-                <!-- Green network - bottom center/right -->
-                <line x1="58%" y1="68%" x2="68%" y2="76%" stroke="#4AAE8C"/>
-                <line x1="68%" y1="76%" x2="78%" y2="70%" stroke="#4AAE8C"/>
-                <line x1="78%" y1="70%" x2="84%" y2="80%" stroke="#4AAE8C"/>
-                <line x1="58%" y1="68%" x2="52%" y2="80%" stroke="#4AAE8C"/>
-                <line x1="52%" y1="80%" x2="65%" y2="86%" stroke="#4AAE8C"/>
-                <line x1="65%" y1="86%" x2="78%" y2="83%" stroke="#4AAE8C"/>
-                <line x1="68%" y1="76%" x2="65%" y2="86%" stroke="#4AAE8C"/>
-
-                <!-- Cross-network bridges (sparse) -->
-                <line x1="32%" y1="26%" x2="50%" y2="33%" stroke="#4A90D9" opacity="0.4"/>
-                <line x1="50%" y1="33%" x2="82%" y2="24%" stroke="#E8854A" opacity="0.4"/>
-                <line x1="30%" y1="42%" x2="42%" y2="52%" stroke="#4A90D9" opacity="0.3"/>
-                <line x1="42%" y1="52%" x2="58%" y2="68%" stroke="#4AAE8C" opacity="0.3"/>
-                <line x1="93%" y1="30%" x2="88%" y2="52%" stroke="#E8854A" opacity="0.3"/>
-                <line x1="88%" y1="52%" x2="78%" y2="70%" stroke="#4AAE8C" opacity="0.3"/>
-
-                <!-- Geometric shapes -->
-                <polygon points="70,110 95,60 120,110" stroke="#4A90D9" opacity="0.6"/>
-                <polygon points="260,310 290,260 320,310" stroke="#4A90D9" opacity="0.4"/>
-                <polygon points="1200,65 1225,20 1250,65 1225,110" stroke="#E8854A" opacity="0.5"/>
-                <polygon points="1000,420 1025,380 1050,420 1025,460" stroke="#E8854A" opacity="0.4"/>
-                <polygon points="820,580 845,565 870,580 870,608 845,623 820,608" stroke="#4AAE8C" opacity="0.5"/>
-                <polygon points="140,500 162,488 184,500 184,524 162,536 140,524" stroke="#4AAE8C" opacity="0.4"/>
-            </g>
-
-            <!-- Data point nodes - spread across -->
-            <g>
-                <!-- Blue nodes -->
-                <circle cx="5%" cy="8%" r="4.5" fill="#4A90D9" opacity="0.35"/>
-                <circle cx="15%" cy="20%" r="6" fill="#4A90D9" opacity="0.22"/>
-                <circle cx="8%" cy="30%" r="3.5" fill="#4A90D9" opacity="0.28"/>
-                <circle cx="18%" cy="38%" r="4" fill="#4A90D9" opacity="0.22"/>
-                <circle cx="25%" cy="14%" r="3" fill="#4A90D9" opacity="0.3"/>
-                <circle cx="32%" cy="26%" r="5" fill="#4A90D9" opacity="0.18"/>
-                <circle cx="18%" cy="6%" r="2.5" fill="#4A90D9" opacity="0.25"/>
-                <circle cx="30%" cy="42%" r="3.5" fill="#4A90D9" opacity="0.18"/>
-
-                <!-- Orange nodes -->
-                <circle cx="78%" cy="4%" r="3.5" fill="#E8854A" opacity="0.32"/>
-                <circle cx="88%" cy="14%" r="6" fill="#E8854A" opacity="0.22"/>
-                <circle cx="95%" cy="7%" r="3" fill="#E8854A" opacity="0.28"/>
-                <circle cx="82%" cy="24%" r="4" fill="#E8854A" opacity="0.2"/>
-                <circle cx="93%" cy="30%" r="5" fill="#E8854A" opacity="0.18"/>
-                <circle cx="98%" cy="19%" r="2.5" fill="#E8854A" opacity="0.22"/>
-                <circle cx="88%" cy="52%" r="3.5" fill="#E8854A" opacity="0.15"/>
-
-                <!-- Green nodes -->
-                <circle cx="58%" cy="68%" r="4" fill="#4AAE8C" opacity="0.28"/>
-                <circle cx="68%" cy="76%" r="6" fill="#4AAE8C" opacity="0.2"/>
-                <circle cx="78%" cy="70%" r="3.5" fill="#4AAE8C" opacity="0.28"/>
-                <circle cx="84%" cy="80%" r="4" fill="#4AAE8C" opacity="0.18"/>
-                <circle cx="52%" cy="80%" r="3" fill="#4AAE8C" opacity="0.22"/>
-                <circle cx="65%" cy="86%" r="5" fill="#4AAE8C" opacity="0.18"/>
-                <circle cx="78%" cy="83%" r="2.5" fill="#4AAE8C" opacity="0.2"/>
-
-                <!-- Bridge nodes -->
-                <circle cx="50%" cy="33%" r="4" fill="#888" opacity="0.1"/>
-                <circle cx="42%" cy="52%" r="3" fill="#888" opacity="0.08"/>
-
-                <!-- Scattered accents -->
-                <circle cx="45%" cy="10%" r="2" fill="#4A90D9" opacity="0.15"/>
-                <circle cx="62%" cy="16%" r="2" fill="#E8854A" opacity="0.12"/>
-                <circle cx="35%" cy="58%" r="2" fill="#4AAE8C" opacity="0.12"/>
-                <circle cx="92%" cy="62%" r="2" fill="#E8854A" opacity="0.1"/>
-                <circle cx="8%" cy="72%" r="2" fill="#4A90D9" opacity="0.12"/>
-                <circle cx="40%" cy="88%" r="2" fill="#4AAE8C" opacity="0.12"/>
-            </g>
-        </svg>
-    </div>
-
-    <div class="content-frame">
-    <nav>
+    <header>
         <div class="container">
-            <span class="nav-name">John MacGillis</span>
-            <div class="nav-links">
-                <a href="#services">Services</a>
-                <a href="#experience">Experience</a>
-                <a href="#about">About</a>
-                <a href="#contact">Contact</a>
-            </div>
-        </div>
-    </nav>
-
-    <header class="hero">
-        <div class="container">
-            <div class="hero-inner">
-                <img src="Headshot.jpg" alt="John MacGillis" class="hero-photo">
-                <div class="hero-text">
-                    <span class="availability">Available for consulting</span>
-                    <p class="hero-name">John MacGillis &middot; Marketing Consultant</p>
-                    <h1>Marketing that answers to revenue.</h1>
-                    <p class="hero-sub">I help organizations turn media spend into clients: growth strategy, performance media, in-house creative, and the data and automation to show what's working.</p>
-                    <div class="hero-cta">
-                        <a href="mailto:john@johnmacgillis.ca?subject=Marketing%20consulting" class="btn-primary">Start a conversation &rarr;</a>
-                        <a href="#experience" class="btn-secondary">See my experience</a>
+            <div class="intro">
+                <img src="Headshot.jpg" alt="John MacGillis" class="photo">
+                <div>
+                    <h1>John MacGillis</h1>
+                    <p class="title">Marketing Consultant &middot; Halifax, Nova Scotia</p>
+                    <div class="links">
+                        <a href="mailto:john@johnmacgillis.ca">john@johnmacgillis.ca</a>
+                        <a href="https://www.linkedin.com/in/john-macgillis-073236158/" target="_blank">LinkedIn</a>
                     </div>
                 </div>
             </div>
         </div>
     </header>
 
-    <section class="thesis">
+    <section>
         <div class="container">
-            <div class="thesis-inner">
-                <blockquote>Most marketing budgets can't tell you which dollar brought in which client. That's the first thing I fix.</blockquote>
-                <p class="thesis-body">At a personal injury firm operating in four Atlantic provinces, I tied paid search, streaming, television, radio and social back to lead source, cost per acquisition and case value, so the budget went where the cases actually came from. Then we built the creative studio and the internal tools to do more of it, in-house.</p>
-            </div>
+            <h2>About</h2>
+            <p class="lead">I help organizations get more clients from their marketing budget, and show clearly where those clients came from.</p>
+            <p>Most recently I led growth at MacGillivray Injury and Insurance Law, where I managed $600K a month in media across four Atlantic provinces, built an in-house creative team producing broadcast-quality advertising, and developed the reporting and automation behind the firm's marketing and operations. I trained as a journalist at Carleton University and began my career in communications at the Nova Scotia Barristers' Society.</p>
+            <p>I'm now available for consulting engagements in Atlantic Canada and remotely.</p>
         </div>
     </section>
 
-    <section class="numbers-section" style="padding-top: 0;">
+    <section>
         <div class="container">
-            <div class="numbers">
-                <div class="number"><strong>$600K</strong><span>monthly media spend managed</span></div>
-                <div class="number"><strong>4</strong><span>provinces across Atlantic Canada</span></div>
-                <div class="number"><strong>Broadcast</strong><span>standard creative, produced in-house</span></div>
-                <div class="number"><strong>7</strong><span>person team led across marketing, dev &amp; ops</span></div>
-            </div>
-        </div>
-    </section>
-
-    <section id="services">
-        <div class="container">
-            <div class="section-label">How I can help</div>
-
-            <div class="bento">
-
-                <div class="project project-featured">
-                    <div>
-                        <div class="project-header">
-                            <h3>Growth strategy &amp; marketing audits</h3>
-                        </div>
-                        <p>An outside look at where your marketing money goes and what it returns. I map spend to leads, leads to clients, and clients to revenue, then give you a plan for what to cut, what to scale and what to measure next.</p>
-                        <div class="project-stats">
-                            <span class="stat"><strong>Channel mix</strong> review</span>
-                            <span class="stat"><strong>Cost per acquisition</strong> by source</span>
-                            <span class="stat"><strong>Budget</strong> reallocation plan</span>
-                        </div>
-                    </div>
+            <h2>Services</h2>
+            <div class="services">
+                <div>
+                    <h3>Marketing strategy &amp; audits</h3>
+                    <p>A clear review of where your marketing budget goes, what it returns, and what to change.</p>
                 </div>
-
-                <div class="project project-small">
-                    <div>
-                        <div class="project-header">
-                            <h3>Performance media</h3>
-                        </div>
-                        <ul>
-                            <li>Paid search, paid social and SEO</li>
-                            <li>Streaming and CTV, including Amazon DSP and Netflix</li>
-                            <li>Radio and television buys</li>
-                            <li>Reporting on lead source, CPA and client value</li>
-                        </ul>
-                    </div>
+                <div>
+                    <h3>Media planning</h3>
+                    <p>Paid search, social, streaming, radio and television, measured by cost per acquisition.</p>
                 </div>
-
-                <div class="project project-small">
-                    <div>
-                        <div class="project-header">
-                            <h3>In-house creative</h3>
-                        </div>
-                        <ul>
-                            <li>Standing up an in-house creative team</li>
-                            <li>Scriptwriting for broadcast and streaming ads</li>
-                            <li>Directing in-house and external cinematographers</li>
-                            <li>Broadcast-quality output without agency overhead</li>
-                        </ul>
-                    </div>
+                <div>
+                    <h3>Creative production</h3>
+                    <p>Scripts, production and building an in-house creative team to a broadcast standard.</p>
                 </div>
-
-                <div class="project project-small">
-                    <div>
-                        <div class="project-header">
-                            <h3>Marketing automation &amp; AI</h3>
-                        </div>
-                        <ul>
-                            <li>Lead tracking and attribution that holds up</li>
-                            <li>Automating intake and follow-up work</li>
-                            <li>Practical AI tools your team will actually use</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="project project-small">
-                    <div>
-                        <div class="project-header">
-                            <h3>Communications &amp; media relations</h3>
-                        </div>
-                        <ul>
-                            <li>Media relations for high-profile matters</li>
-                            <li>Websites, newsletters and social channels</li>
-                            <li>Reports and briefings for boards and regulators</li>
-                        </ul>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <section id="experience">
-        <div class="container">
-            <div class="section-label">Experience</div>
-            <div class="timeline">
-
-                <div class="role">
-                    <div class="role-when">Aug 2025 &ndash; Oct 2026</div>
-                    <div>
-                        <h3>Director of Growth</h3>
-                        <p class="role-org">MacGillivray Injury and Insurance Law &middot; Halifax</p>
-                        <ul>
-                            <li>Led growth strategy across performance marketing, analytics, software development and data engineering for a firm operating in four Atlantic provinces.</li>
-                            <li>Managed a 7-person team spanning IT, software development, marketing and operations.</li>
-                            <li>Built an AI workspace and automations for filings, demand letters and records requests, freeing staff for client-facing work.</li>
-                            <li>Managed media relations on high-profile class action lawsuits.</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="role">
-                    <div class="role-when">Nov 2024 &ndash; Aug 2025</div>
-                    <div>
-                        <h3>Director of Marketing</h3>
-                        <p class="role-org">MacGillivray Injury and Insurance Law &middot; Halifax</p>
-                        <ul>
-                            <li>Managed $600K/month in media across paid search, Amazon DSP streaming, Netflix direct insertion, radio, social and television.</li>
-                            <li>Negotiated with Netflix Canada to secure an exclusivity arrangement for the firm in the Atlantic Canada personal injury market.</li>
-                            <li>Led a 5-person creative team producing all content in-house to a broadcast standard.</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="role">
-                    <div class="role-when">Nov 2023 &ndash; Nov 2024</div>
-                    <div>
-                        <h3>Digital Marketing Strategist</h3>
-                        <p class="role-org">MacGillivray Injury and Insurance Law &middot; Halifax</p>
-                        <ul>
-                            <li>Ran paid search, paid social and SEO across Atlantic Canada, reporting on lead source, cost per acquisition and case value to guide budget.</li>
-                            <li>Wrote scripts and worked with cinematographers to produce broadcast-quality advertising.</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="role">
-                    <div class="role-when">May 2022 &ndash; Nov 2023</div>
-                    <div>
-                        <h3>Projects Advisor &middot; Communications Advisor</h3>
-                        <p class="role-org">Nova Scotia Barristers' Society &middot; Halifax</p>
-                        <ul>
-                            <li>Sole communicator for the provincial legal regulator: website, social media and monthly newsletter.</li>
-                            <li>Supported 25+ committees and Council with reports on discipline, equity and technology.</li>
-                            <li>Planned the launch of an innovation sandbox and moved complaints intake from paper to digital.</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="role">
-                    <div class="role-when">2017 &ndash; 2023</div>
-                    <div>
-                        <h3>Carleton University</h3>
-                        <p class="role-org">Master of Journalism &middot; Bachelor of Journalism, Minor in Business</p>
-                        <p>Teaching assistant in advanced photojournalism and audio journalism.</p>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <section id="about">
-        <div class="container">
-            <div class="section-label">About</div>
-            <div class="about-grid">
-                <div class="about-col">
-                    <h3>Background</h3>
-                    <p>I trained as a journalist at Carleton University and have written for The Walrus and Financial Post. That's where I learned to write a script, frame a shot and get to the point.</p>
-                    <p>I spent the last three years at a regional law firm, starting on paid search and ending up running growth. That meant the media budget, the creative team and the software behind it.</p>
-                </div>
-                <div class="about-col">
-                    <h3>How I work</h3>
-                    <p>I'm most useful to organizations spending real money on marketing without a clear line from spend to results. Professional services, regulated industries, and anyone trying to bring agency work in-house.</p>
-                    <p>I'm based in Halifax and work across Atlantic Canada and remotely. I also build software on the side, including <a href="https://seahorse-app-6b8lk.ondigitalocean.app" target="_blank" style="color:#444;">NS Legal Research</a> and <a href="https://jellyfish-app-spafj.ondigitalocean.app" target="_blank" style="color:#444;">NS Hansard Search</a>, so the data and automation side isn't a handoff.</p>
+                <div>
+                    <h3>Measurement &amp; automation</h3>
+                    <p>Lead tracking, reporting and practical automation, including AI tools.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="contact" class="contact">
+    <section>
         <div class="container">
-            <div class="contact-inner">
-                <p>Want an outside look at your marketing, or help building it in-house? Let's talk.</p>
-                <div class="contact-links">
-                    <a href="mailto:john@johnmacgillis.ca?subject=Marketing%20consulting">john@johnmacgillis.ca</a>
-                    <a href="https://www.linkedin.com/in/john-macgillis-073236158/" target="_blank">LinkedIn</a>
-                    <a href="https://github.com/JohnMacGillis" target="_blank">GitHub</a>
+            <h2>Experience</h2>
+
+            <div class="role">
+                <div class="when">2025 &ndash; 2026</div>
+                <div>
+                    <h3>Director of Growth</h3>
+                    <p class="org">MacGillivray Injury and Insurance Law</p>
+                    <ul>
+                        <li>Led growth strategy across marketing, analytics and software for a firm in four provinces.</li>
+                        <li>Managed a 7-person team across marketing, technology and operations.</li>
+                        <li>Managed media relations for high-profile class action lawsuits.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="role">
+                <div class="when">2024 &ndash; 2025</div>
+                <div>
+                    <h3>Director of Marketing</h3>
+                    <p class="org">MacGillivray Injury and Insurance Law</p>
+                    <ul>
+                        <li>Managed $600K/month in media across search, streaming, Netflix, radio, social and television.</li>
+                        <li>Led a 5-person creative team producing all content in-house.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="role">
+                <div class="when">2023 &ndash; 2024</div>
+                <div>
+                    <h3>Digital Marketing Strategist</h3>
+                    <p class="org">MacGillivray Injury and Insurance Law</p>
+                    <ul>
+                        <li>Managed paid search, paid social and SEO, reporting on cost per acquisition and case value.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="role">
+                <div class="when">2022 &ndash; 2023</div>
+                <div>
+                    <h3>Communications Advisor, Projects Advisor</h3>
+                    <p class="org">Nova Scotia Barristers' Society</p>
+                    <ul>
+                        <li>Managed the website, social media and newsletter for the provincial legal regulator.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="role">
+                <div class="when">Education</div>
+                <div>
+                    <h3>Master of Journalism; Bachelor of Journalism, Minor in Business</h3>
+                    <p class="org">Carleton University</p>
                 </div>
             </div>
         </div>
@@ -640,10 +189,9 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2026 John MacGillis &middot; Halifax, Nova Scotia</p>
+            <p>&copy; 2026 John MacGillis &middot; <a href="mailto:john@johnmacgillis.ca" style="color:#999;">john@johnmacgillis.ca</a></p>
         </div>
     </footer>
-    </div><!-- end content-frame -->
 
 </body>
 </html>
