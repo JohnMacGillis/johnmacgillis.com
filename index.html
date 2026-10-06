@@ -3,315 +3,327 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>John MacGillis — Consultant &amp; Developer</title>
-    <meta name="description" content="Consultant and developer in Halifax, Nova Scotia. Workflow automation, AI development and performance marketing for firms and small businesses.">
-    <meta property="og:title" content="John MacGillis — Consultant &amp; Developer">
-    <meta property="og:description" content="Workflow automation, AI development and performance marketing for firms and small businesses.">
+    <title>John MacGillis | Software &amp; Automation for Professional Firms</title>
+    <meta name="description" content="Halifax-based developer building document, intake and workflow automation for professional firms. Built and run inside a regional law firm that sent 10,000+ automated records requests in four months.">
+    <meta property="og:title" content="John MacGillis | Software &amp; Automation for Professional Firms">
+    <meta property="og:description" content="Software that gives your team its time back. Intake, document drafting, requests and follow-ups, connected to the systems you already use.">
     <meta property="og:image" content="https://johnmacgillis.ca/Headshot.jpg">
     <meta property="og:url" content="https://johnmacgillis.ca/">
     <meta property="og:type" content="website">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #fbfaf8;
-            --surface: #ffffff;
-            --ink: #14171c;
-            --text: #3d434c;
-            --muted: #6b7280;
-            --faint: #9aa0a8;
-            --line: #e7e4df;
-            --accent: #1f4e79;
-            --accent-soft: #eaf0f6;
-            --serif: 'Newsreader', Georgia, serif;
-            --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            --paper: #fbf9f5;
+            --ink: #1a1a1a;
+            --grey: #62605c;
+            --rule: #dcd9d3;
+            --link: #1f4f8f;
+            --wash: #eef3f9;
+            --on-link: #ffffff;
         }
         @media (prefers-color-scheme: dark) {
             :root {
-                --bg: #111317;
-                --surface: #181b20;
-                --ink: #f2f3f5;
-                --text: #c6cad1;
-                --muted: #9299a3;
-                --faint: #6d747e;
-                --line: #2a2e35;
-                --accent: #8cb4dd;
-                --accent-soft: #1c2633;
+                --paper: #161514;
+                --ink: #e8e6e3;
+                --grey: #a3a09b;
+                --rule: #34363a;
+                --link: #8fb6e8;
+                --wash: #1b2029;
+                --on-link: #12161c;
             }
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
+
         body {
-            background: var(--bg);
-            color: var(--text);
-            font-family: var(--sans);
-            font-size: 1rem;
-            line-height: 1.65;
+            background: var(--paper);
+            color: var(--ink);
+            font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+            font-size: 1.1875rem;
+            line-height: 1.6;
             -webkit-font-smoothing: antialiased;
         }
-        a { color: inherit; }
-        .container { max-width: 1040px; margin: 0 auto; padding: 0 1.5rem; }
 
-        /* ---- NAV ---- */
-        nav {
+        .page { max-width: 960px; margin: 0 auto; padding: 0 1.5rem; }
+        .narrow { max-width: 680px; }
+
+        a { color: var(--link); text-underline-offset: 0.18em; text-decoration-thickness: 1px; }
+        a:hover { text-decoration-thickness: 2px; }
+
+        p + p { margin-top: 1em; }
+
+        .kicker {
+            font-variant: all-small-caps; letter-spacing: 0.08em; font-size: 1.15rem;
+            color: var(--link);
+        }
+
+        /* sticky header with the call button top right */
+        .topbar {
             position: sticky; top: 0; z-index: 10;
-            background: color-mix(in srgb, var(--bg) 88%, transparent);
-            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--line);
+            background: var(--paper);
         }
-        nav .container { display: flex; align-items: center; justify-content: space-between; height: 64px; }
-        .brand { font-weight: 600; color: var(--ink); text-decoration: none; letter-spacing: -0.01em; }
-        .nav-links { display: flex; align-items: center; gap: 2rem; font-size: 0.9rem; }
-        .nav-links a { text-decoration: none; color: var(--muted); }
-        .nav-links a:hover { color: var(--ink); }
-        .nav-links .nav-cta { color: var(--ink); border: 1px solid var(--line); padding: 0.45rem 1rem; border-radius: 999px; }
-        .nav-links .nav-cta:hover { border-color: var(--ink); }
+        .masthead {
+            display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+            padding: 1.1rem 0 0.9rem; border-bottom: 1px solid var(--ink);
+        }
+        .masthead .name { font-size: 1.35rem; font-weight: 600; letter-spacing: -0.01em; }
+        .masthead .name small { display: block; font-size: 0.95rem; font-weight: 400; color: var(--grey); letter-spacing: 0; }
+        .double { border-bottom: 3px solid var(--link); margin-top: 3px; }
+        .call {
+            display: inline-flex; align-items: center; gap: 0.5rem; flex-shrink: 0;
+            background: var(--link); color: var(--on-link);
+            padding: 0.55rem 1.05rem; border-radius: 999px;
+            font-size: 1.05rem; font-weight: 600; text-decoration: none; white-space: nowrap;
+        }
+        .call:hover { filter: brightness(1.1); }
+        .call svg { width: 1.05em; height: 1.05em; fill: currentColor; }
+        .call .short { display: none; }
 
-        /* ---- HERO ---- */
-        .hero { padding: 6.5rem 0 5.5rem; }
-        .hero-grid { display: grid; grid-template-columns: 1fr 260px; gap: 4rem; align-items: center; }
-        .eyebrow {
-            display: inline-flex; align-items: center; gap: 0.6rem;
-            font-size: 0.85rem; font-weight: 500; color: var(--muted); margin-bottom: 1.5rem;
+        /* intro */
+        .intro {
+            display: grid; grid-template-columns: 1fr 220px; gap: 3.5rem; align-items: end;
+            padding: 4.5rem 0 4rem;
         }
-        .dot { width: 8px; height: 8px; border-radius: 50%; background: #2f9e6a; box-shadow: 0 0 0 4px rgba(47, 158, 106, 0.18); }
         h1 {
-            font-family: var(--serif); font-weight: 400; color: var(--ink);
-            font-size: clamp(2.4rem, 5.2vw, 3.6rem); line-height: 1.08; letter-spacing: -0.02em;
+            font-size: clamp(2.3rem, 5vw, 3.4rem); font-weight: 300; line-height: 1.08; letter-spacing: -0.02em;
+            margin: 0.75rem 0 1.75rem;
         }
-        h1 em { font-style: italic; color: var(--accent); }
-        .hero-sub { font-size: 1.15rem; color: var(--muted); max-width: 560px; margin-top: 1.5rem; }
-        .actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 2.25rem; }
-        .btn {
-            display: inline-flex; align-items: center; gap: 0.5rem;
-            padding: 0.8rem 1.4rem; border-radius: 8px; font-size: 0.95rem; font-weight: 500;
-            text-decoration: none; transition: background 0.15s, border-color 0.15s, color 0.15s;
+        h1 em { font-style: italic; color: var(--link); }
+        .intro .lede { font-size: 1.3rem; line-height: 1.5; max-width: 34em; }
+        .intro .lede + p { color: var(--grey); margin-top: 1.1em; max-width: 36em; }
+        figure { position: relative; }
+        figure::before {
+            content: ""; position: absolute; inset: 0 0 auto 0; aspect-ratio: 4 / 5;
+            transform: translate(-10px, 10px); border: 1px solid var(--link); z-index: 0;
         }
-        .btn-primary { background: var(--ink); color: var(--bg); }
-        .btn-primary:hover { background: var(--accent); }
-        .btn-ghost { border: 1px solid var(--line); color: var(--ink); }
-        .btn-ghost:hover { border-color: var(--ink); }
-        .portrait {
-            width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 14px;
-            box-shadow: 0 20px 50px -20px rgba(20, 23, 28, 0.35);
+        figure img { position: relative; z-index: 1; display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; filter: grayscale(0.15); }
+        figcaption { font-size: 0.9rem; font-style: italic; color: var(--grey); margin-top: 1rem; }
+
+        /* proof band */
+        .band { background: var(--wash); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+        .stats { display: grid; grid-template-columns: repeat(4, 1fr); }
+        .stat { padding: 2.5rem 1.5rem 2.75rem; }
+        .stat:first-child { padding-left: 0; }
+        .stat:last-child { padding-right: 0; }
+        .stat + .stat { border-left: 1px solid var(--rule); }
+        .stat .num {
+            display: block; font-size: 2.6rem; font-weight: 300; line-height: 1.1; color: var(--link);
+            font-variant-numeric: lining-nums;
         }
+        .stat p { font-size: 1rem; color: var(--grey); margin-top: 0.5rem; line-height: 1.45; }
 
-        /* ---- PROOF STRIP ---- */
-        .proof { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--surface); }
-        .proof .container { display: grid; grid-template-columns: repeat(3, 1fr); }
-        .stat { padding: 2rem 1.5rem; border-left: 1px solid var(--line); }
-        .stat:first-child { border-left: 0; padding-left: 0; }
-        .stat strong { display: block; font-family: var(--serif); font-weight: 400; font-size: 2rem; color: var(--ink); line-height: 1.15; }
-        .stat span { font-size: 0.85rem; color: var(--muted); }
+        /* sections */
+        section { padding: 4.5rem 0 0; }
+        h2 { font-size: 1.75rem; font-weight: 600; line-height: 1.25; margin: 0.25rem 0 1.1rem; }
+        h3 { font-size: 1.25rem; font-weight: 600; line-height: 1.3; margin-bottom: 0.45rem; }
 
-        /* ---- SECTIONS ---- */
-        section { padding: 6rem 0; }
-        .section-head { display: grid; grid-template-columns: 260px 1fr; gap: 4rem; margin-bottom: 3rem; }
-        .label { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); padding-top: 0.65rem; }
-        h2 { font-family: var(--serif); font-weight: 400; font-size: 2rem; line-height: 1.2; color: var(--ink); letter-spacing: -0.01em; max-width: 620px; }
-        .body-offset { margin-left: calc(260px + 4rem); }
+        .builds { display: grid; grid-template-columns: 1fr 1fr; gap: 0 3rem; margin-top: 1.5rem; border-top: 1px solid var(--rule); }
+        .build { padding: 1.6rem 0; border-bottom: 1px solid var(--rule); }
+        .build p { font-size: 1.05rem; }
 
-        /* ---- PROBLEMS ---- */
-        .problems { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
-        .problem {
-            background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
-            padding: 2.5rem; display: flex; flex-direction: column;
+        .who { margin-top: 1.25rem; font-size: 1.1rem; display: flex; flex-wrap: wrap; row-gap: 0.3rem; }
+        .who span + span::before { content: "·"; color: var(--link); margin: 0 0.6em; }
+
+        .case { margin-top: 1.5rem; border-left: 3px solid var(--link); padding-left: 1.5rem; }
+        .case dt { font-variant: all-small-caps; letter-spacing: 0.08em; color: var(--grey); font-size: 1.05rem; }
+        .case dd { margin: 0.1rem 0 1.25rem; }
+        .case dd:last-child { margin-bottom: 0; }
+        .note { color: var(--grey); font-style: italic; margin-top: 1.25rem; font-size: 1rem; }
+
+        .steps { list-style: none; margin: 1.5rem 0 0; counter-reset: step; }
+        .steps li { counter-increment: step; position: relative; padding-left: 3rem; font-size: 1.1rem; }
+        .steps li + li { margin-top: 1.1rem; }
+        .steps li::before {
+            content: counter(step); position: absolute; left: 0; top: -0.15rem;
+            font-size: 1.9rem; font-weight: 300; font-style: italic; color: var(--link); line-height: 1;
         }
-        .problem .num { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); }
-        .problem h3 { font-family: var(--serif); font-weight: 400; font-size: 1.9rem; line-height: 1.15; color: var(--ink); margin: 0.6rem 0 1rem; }
-        .problem > p { color: var(--muted); font-size: 1rem; }
-        .fix { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--line); }
-        .fix-label { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
-        .fix h4 { font-size: 1.1rem; font-weight: 600; color: var(--ink); margin: 0.35rem 0 0.9rem; }
-        .fix ul { list-style: none; }
-        .fix li { position: relative; padding-left: 1.5rem; font-size: 0.95rem; color: var(--text); }
-        .fix li + li { margin-top: 0.55rem; }
-        .fix-note { margin-top: 1.1rem; font-size: 0.95rem; color: var(--muted); font-style: italic; }
-        .fix li::before { content: "\2192"; position: absolute; left: 0; color: var(--accent); }
+        .steps strong { font-weight: 600; }
 
-        /* ---- ABOUT / EXPERIENCE ---- */
-        .about p { font-size: 1.05rem; max-width: 640px; }
-        .about p + p { margin-top: 1.1rem; }
-        .timeline { margin-top: 3rem; border-top: 1px solid var(--line); max-width: 640px; }
-        .role { display: grid; grid-template-columns: 120px 1fr; gap: 1.5rem; padding: 1.25rem 0; border-bottom: 1px solid var(--line); }
-        .role .when { font-size: 0.85rem; color: var(--faint); font-variant-numeric: tabular-nums; padding-top: 0.1rem; }
-        .role h3 { font-size: 0.98rem; font-weight: 600; color: var(--ink); }
-        .role .org { font-size: 0.9rem; color: var(--muted); }
+        .cv { margin-top: 2rem; border-top: 1px solid var(--rule); font-size: 1.05rem; }
+        .cv div { display: flex; gap: 1.5rem; padding: 0.6rem 0; border-bottom: 1px solid var(--rule); }
+        .cv .yr { flex: 0 0 6.5rem; color: var(--grey); font-variant-numeric: oldstyle-nums; }
 
-        /* ---- CONTACT ---- */
-        .contact { background: var(--ink); color: var(--bg); }
-        .contact h2 { color: var(--bg); font-size: clamp(2rem, 4vw, 2.8rem); max-width: 700px; }
-        .contact p { color: var(--faint); margin-top: 1.25rem; max-width: 560px; font-size: 1.05rem; }
-        .contact .btn-primary { background: var(--bg); color: var(--ink); }
-        .contact .btn-primary:hover { background: var(--accent-soft); }
-        .contact .btn-ghost { border-color: var(--muted); color: var(--bg); }
-        .contact .btn-ghost:hover { border-color: var(--bg); }
+        /* contact */
+        .contact { margin-top: 4.5rem; padding: 3rem 0; border-top: 3px solid var(--link); }
+        .contact .big {
+            font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 300; line-height: 1.2; letter-spacing: -0.01em;
+            margin: 0.5rem 0 1.25rem;
+        }
+        .contact .big a { font-style: italic; overflow-wrap: anywhere; }
 
-        footer { padding: 2rem 0; font-size: 0.85rem; color: var(--faint); }
-        footer .container { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
-        footer a { text-decoration: none; }
-        footer a:hover { color: var(--ink); }
-        footer .links { display: flex; gap: 1.5rem; }
+        footer {
+            padding: 1rem 0 3rem; border-top: 1px solid var(--rule);
+            font-size: 0.95rem; color: var(--grey);
+            display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem 1rem;
+        }
+        footer a { color: var(--grey); }
 
-        @media (max-width: 860px) {
-            .hero { padding: 3.5rem 0 3.5rem; }
-            .hero-grid { grid-template-columns: 1fr; gap: 2rem; }
-            .portrait { width: 120px; aspect-ratio: 1; border-radius: 50%; order: -1; }
-            .proof .container { grid-template-columns: 1fr; }
-            .stat, .stat:first-child { padding: 1.25rem 0; border-left: 0; }
-            .stat + .stat { border-top: 1px solid var(--line); }
-            .stat strong { font-size: 1.7rem; }
-            section { padding: 4rem 0; }
-            .section-head { grid-template-columns: 1fr; gap: 0.5rem; margin-bottom: 2rem; }
-            .label { padding-top: 0; }
-            h2 { font-size: 1.7rem; }
-            .body-offset { margin-left: 0; }
-            .problems { grid-template-columns: 1fr; }
-            .problem { padding: 1.75rem; }
-            .problem h3 { font-size: 1.6rem; }
-            .role { grid-template-columns: 1fr; gap: 0.2rem; }
-            .nav-links a:not(.nav-cta) { display: none; }
+        @media (max-width: 760px) {
+            body { font-size: 1.0625rem; }
+            .masthead .name small { display: none; }
+            .call { padding: 0.5rem 0.9rem; font-size: 1rem; }
+            .intro { grid-template-columns: 1fr; gap: 2rem; padding: 3rem 0 3rem; }
+            figure { order: -1; width: 130px; }
+            figure img, figure::before { aspect-ratio: 1; }
+            figure::before { transform: translate(6px, 6px); }
+            figcaption { display: none; }
+            .intro .lede { font-size: 1.15rem; }
+            .stats { grid-template-columns: 1fr 1fr; }
+            .stat, .stat:first-child, .stat:last-child { padding: 1.75rem 1rem 1.75rem 0; }
+            .stat:nth-child(even) { padding-left: 1rem; }
+            .stat + .stat { border-left: 0; }
+            .stat:nth-child(even) { border-left: 1px solid var(--rule); }
+            .stat:nth-child(n+3) { border-top: 1px solid var(--rule); }
+            .stat .num { font-size: 2rem; }
+            section { padding-top: 3.25rem; }
+            .builds { grid-template-columns: 1fr; }
+            .cv div { flex-direction: column; gap: 0; }
+            .cv .yr { flex: none; font-size: 0.95rem; }
+        }
+        @media (max-width: 400px) {
+            .call .full { display: none; }
+            .call .short { display: inline; }
         }
     </style>
 </head>
 <body>
 
-    <nav>
-        <div class="container">
-            <a href="#" class="brand">John MacGillis</a>
-            <div class="nav-links">
-                <a href="#services">How I help</a>
-                <a href="#about">About</a>
-                <a href="#contact" class="nav-cta">Get in touch</a>
-            </div>
+<header class="topbar">
+    <div class="page">
+        <div class="masthead">
+            <span class="name">John MacGillis<small>Software &amp; automation &middot; Halifax, Nova Scotia</small></span>
+            <a class="call" href="tel:+19024034993" aria-label="Call John at 902-403-4993">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>
+                <span class="full">902-403-4993</span><span class="short">Call</span>
+            </a>
         </div>
-    </nav>
+        <div class="double"></div>
+    </div>
+</header>
 
-    <header class="hero">
-        <div class="container hero-grid">
-            <div>
-                <div class="eyebrow"><span class="dot"></span>Available for new projects &middot; Halifax, NS &amp; remote</div>
-                <h1>More clients. <em>More time.</em></h1>
-                <p class="hero-sub">Most businesses I talk to are stuck on one of two problems: not enough clients, or not enough time to handle the work they already have. I help with both.</p>
-                <div class="actions">
-                    <a href="#contact" class="btn btn-primary">Start a conversation &rarr;</a>
-                    <a href="#services" class="btn btn-ghost">See how I help</a>
-                </div>
-            </div>
-            <img src="Headshot.jpg" alt="John MacGillis" class="portrait">
+<div class="page">
+    <div class="intro">
+        <div>
+            <span class="kicker">Software &amp; automation for professional firms</span>
+            <h1>Software that gives your team <em>its time back.</em></h1>
+            <p class="lede">I build the tools that take paperwork off skilled people: intake, document drafting, requests and follow-ups, and reporting. They connect to the systems you already use.</p>
+            <p>I learned how inside a large regional law firm, where I ran growth and led the team that built its in-house software. Now I do it for other firms.</p>
         </div>
-    </header>
+        <figure>
+            <img src="Headshot.jpg" alt="John MacGillis">
+            <figcaption>John MacGillis, Halifax</figcaption>
+        </figure>
+    </div>
+</div>
 
-    <div class="proof">
-        <div class="container">
-            <div class="stat"><strong>$600K</strong><span>monthly media budget managed</span></div>
-            <div class="stat"><strong>4</strong><span>provinces of operations supported</span></div>
-            <div class="stat"><strong>7</strong><span>person team led across growth &amp; tech</span></div>
+<div class="band">
+    <div class="page">
+        <div class="stats">
+            <div class="stat"><span class="num">10,000+</span><p>requests sent automatically in four months</p></div>
+            <div class="stat"><span class="num">29</span><p>production services built for one firm</p></div>
+            <div class="stat"><span class="num">4</span><p>provinces of rules, forms and offices covered</p></div>
+            <div class="stat"><span class="num">$600K</span><p>a month in advertising managed, so I know what a client costs to win</p></div>
         </div>
     </div>
+</div>
 
-    <section id="services">
-        <div class="container">
-            <div class="section-head">
-                <div class="label">How I help</div>
-                <h2>Which problem is holding your business back?</h2>
+<div class="page">
+
+    <section class="narrow">
+        <span class="kicker">The problem</span>
+        <h2>Your growth isn&rsquo;t limited by finding clients. It&rsquo;s limited by the paperwork each one creates.</h2>
+        <p>Every new client brings forms, letters, requests to third parties, follow-ups and reports. Most of it is done by hand, copied between a practice-management system, email, a fax machine and someone&rsquo;s spreadsheet.</p>
+        <p>So you hire another assistant. Then another. Meanwhile requests slip, follow-ups never go out, and files sit waiting on something nobody chased.</p>
+        <p>I&rsquo;ve seen it from the inside, and I&rsquo;ve built the software that fixed it.</p>
+    </section>
+
+    <section>
+        <span class="kicker">What I build</span>
+        <h2>Tools that do the preparation, so your people can make the decisions</h2>
+        <div class="builds">
+            <div class="build">
+                <h3>Requests and follow-ups that run themselves</h3>
+                <p>Type a request in plain language. The system picks the right recipient, forms and signatures, sends it by email, fax or mail, then follows up on its own until the answer arrives.</p>
             </div>
-            <div class="problems">
-                <div class="problem">
-                    <div class="num">Problem 01</div>
-                    <h3>Not enough clients.</h3>
-                    <p>You're good at what you do, but the phone isn't ringing enough, or your marketing spend isn't clearly paying for itself.</p>
-                    <div class="fix">
-                        <div class="fix-label">The fix</div>
-                        <h4>Marketing that brings in clients</h4>
-                        <ul>
-                            <li>Media buying across search, social, streaming, radio and TV</li>
-                            <li>Performance marketing measured by cost per client</li>
-                            <li>Cinematography and video production</li>
-                            <li>Script writing and creative direction</li>
-                        </ul>
-                        <p class="fix-note">Done collaboratively: I work alongside you and your team, not in a black box.</p>
-                    </div>
-                </div>
-                <div class="problem">
-                    <div class="num">Problem 02</div>
-                    <h3>Not enough time.</h3>
-                    <p>The work is there, but your team is buried in manual tasks, and the only way to take on more seems to be hiring more people.</p>
-                    <div class="fix">
-                        <div class="fix-label">The fix</div>
-                        <h4>Automation that scales without new headcount</h4>
-                        <ul>
-                            <li>Workflow automation that connects your disjointed systems</li>
-                            <li>AI built into the tech stack you already use</li>
-                            <li>Document generation, intake and reporting on autopilot</li>
-                            <li>Fewer handoffs, less re-entering the same data twice</li>
-                        </ul>
-                        <p class="fix-note">Grow your capacity without growing your payroll.</p>
-                    </div>
-                </div>
+            <div class="build">
+                <h3>AI document review you can check</h3>
+                <p>AI reads long files such as records, contracts and statements and drafts summaries and timelines. Every line links back to the page it came from.</p>
             </div>
+            <div class="build">
+                <h3>Documents drafted from your data</h3>
+                <p>Letters, forms, filings and reports in your house style, ready for a professional to review and sign.</p>
+            </div>
+            <div class="build">
+                <h3>Intake that files itself</h3>
+                <p>Incoming email, faxes and uploads are named, matched to the right client file, made searchable and tagged, with no manual sorting.</p>
+            </div>
+            <div class="build">
+                <h3>Getting off software you&rsquo;ve outgrown</h3>
+                <p>I get your data out of the vendor, connect the systems you&rsquo;re keeping, and build what&rsquo;s missing.</p>
+            </div>
+            <div class="build">
+                <h3>Systems that talk to each other</h3>
+                <p>Practice management, accounting, Microsoft 365, Teams, phone and fax, working together instead of being re-typed between them.</p>
+            </div>
+        </div>
+        <p class="who">
+            <span>Law firms</span><span>Insurance and claims teams</span><span>Clinics and health administration</span><span>Accounting and advisory practices</span><span>Any firm where skilled people lose hours to paperwork</span>
+        </p>
+    </section>
+
+    <section class="narrow">
+        <span class="kicker">Featured work</span>
+        <h2>An automated records desk for a large regional law firm</h2>
+        <dl class="case">
+            <dt>The problem</dt>
+            <dd>Staff at a firm operating in four provinces were preparing thousands of records requests to hospitals, clinics, insurers and government offices by hand. Whether a follow-up went out depended on someone remembering.</dd>
+            <dt>What we built</dt>
+            <dd>A system connected to the firm&rsquo;s case-management software. It reads plain-language requests, matches them against a directory of 30,000 contacts, assembles the right forms with signatures, sends them, tracks replies, and follows up automatically with escalating letters.</dd>
+            <dt>The result</dt>
+            <dd>10,000+ requests sent in four months. Follow-ups send themselves, and the system alerts the team when something needs a person.</dd>
+        </dl>
+        <p class="note">Built with a second developer as part of a 29-service platform designed to replace the firm&rsquo;s case-management software.</p>
+    </section>
+
+    <section class="narrow">
+        <span class="kicker">How I work</span>
+        <h2>Practical, honest, built to last</h2>
+        <ol class="steps">
+            <li><strong>Find the bottleneck.</strong> A short conversation about where your team loses the most time, and an honest answer on whether software will fix it.</li>
+            <li><strong>Build around what you have.</strong> No new platform to adopt. I connect to the systems you already pay for.</li>
+            <li><strong>Keep a person in charge.</strong> Nothing goes to a client, court or third party without someone at your firm approving it.</li>
+            <li><strong>Run it like production.</strong> Tested before every release and monitored, with alerts when something needs attention. Hosted in your own cloud account, in Canada if you need it.</li>
+        </ol>
+    </section>
+
+    <section class="narrow">
+        <span class="kicker">About</span>
+        <h2>Where I&rsquo;ve done this before</h2>
+        <p>Most recently I was Director of Growth at a large regional law firm operating in four Atlantic provinces. I ran about $600K a month in advertising, led a seven-person team across growth and technology, and led the build of the firm&rsquo;s in-house software platform.</p>
+        <p>That&rsquo;s why the software I build starts from how a firm actually makes money, not from a list of features. I trained as a journalist at Carleton, which is mostly why I start every project by asking a lot of questions.</p>
+
+        <div class="cv">
+            <div><span class="yr">2025&ndash;26</span><span>Director of Growth, regional law firm (Atlantic Canada)</span></div>
+            <div><span class="yr">2023&ndash;25</span><span>Director of Marketing; Digital Marketing Strategist, same firm</span></div>
+            <div><span class="yr">2022&ndash;23</span><span>Communications &amp; Projects Advisor, Nova Scotia Barristers&rsquo; Society</span></div>
+            <div><span class="yr">Education</span><span>Master of Journalism and Bachelor of Journalism (minor in Business), Carleton University</span></div>
+            <div><span class="yr">Stack</span><span>Python, FastAPI, React, TypeScript, Azure, Claude AI, Microsoft Graph, Xero</span></div>
         </div>
     </section>
 
-    <section id="about" class="about">
-        <div class="container">
-            <div class="section-head">
-                <div class="label">About</div>
-                <h2>A developer and marketer who understands the business side.</h2>
-            </div>
-            <div class="body-offset">
-                <p>Most recently I led growth at MacGillivray Injury and Insurance Law, where I ran $600K a month in media across four Atlantic provinces, led a creative team producing broadcast advertising in-house, and built the automation and AI tools that replaced most of the manual work across the practice.</p>
-                <p>Before that I worked in communications at the Nova Scotia Barristers' Society, and I trained as a journalist at Carleton University. That background shapes how I work: I start by understanding the problem, work closely with your team, and build things people actually use.</p>
-
-                <div class="timeline">
-                    <div class="role">
-                        <div class="when">2025&ndash;2026</div>
-                        <div><h3>Director of Growth</h3><div class="org">MacGillivray Injury and Insurance Law</div></div>
-                    </div>
-                    <div class="role">
-                        <div class="when">2024&ndash;2025</div>
-                        <div><h3>Director of Marketing</h3><div class="org">MacGillivray Injury and Insurance Law</div></div>
-                    </div>
-                    <div class="role">
-                        <div class="when">2023&ndash;2024</div>
-                        <div><h3>Digital Marketing Strategist</h3><div class="org">MacGillivray Injury and Insurance Law</div></div>
-                    </div>
-                    <div class="role">
-                        <div class="when">2022&ndash;2023</div>
-                        <div><h3>Communications &amp; Projects Advisor</h3><div class="org">Nova Scotia Barristers' Society</div></div>
-                    </div>
-                    <div class="role">
-                        <div class="when">Education</div>
-                        <div><h3>Master of Journalism; Bachelor of Journalism, Minor in Business</h3><div class="org">Carleton University</div></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="contact" class="contact">
-        <div class="container">
-            <h2>Need more clients, or more time? Let's talk.</h2>
-            <p>Tell me what you're working on. I'll reply within a business day with next steps.</p>
-            <div class="actions">
-                <a href="mailto:john@johnmacgillis.ca" class="btn btn-primary">john@johnmacgillis.ca</a>
-                <a href="https://www.linkedin.com/in/john-macgillis-073236158/" target="_blank" rel="noopener" class="btn btn-ghost">LinkedIn</a>
-            </div>
-        </div>
-    </section>
+    <div class="contact">
+        <span class="kicker">Get in touch</span>
+        <p class="big">Call me at <a href="tel:+19024034993">902-403-4993</a></p>
+        <p>Tell me where your team is losing time, and I&rsquo;ll tell you honestly whether software will fix it. You can also email <a href="mailto:john@johnmacgillis.ca">john@johnmacgillis.ca</a> or find me on <a href="https://www.linkedin.com/in/john-macgillis-073236158/" target="_blank" rel="noopener">LinkedIn</a>.</p>
+    </div>
 
     <footer>
-        <div class="container">
-            <span>&copy; 2026 John MacGillis &middot; Halifax, Nova Scotia</span>
-            <div class="links">
-                <a href="mailto:john@johnmacgillis.ca">Email</a>
-                <a href="https://github.com/JohnMacGillis" target="_blank" rel="noopener">GitHub</a>
-                <a href="https://www.linkedin.com/in/john-macgillis-073236158/" target="_blank" rel="noopener">LinkedIn</a>
-            </div>
-        </div>
+        <span>&copy; 2026 John MacGillis &middot; Halifax, Nova Scotia</span>
+        <span><a href="tel:+19024034993">902-403-4993</a> &middot; <a href="mailto:john@johnmacgillis.ca">Email</a> &middot; <a href="https://www.linkedin.com/in/john-macgillis-073236158/" target="_blank" rel="noopener">LinkedIn</a></span>
     </footer>
 
+</div>
 </body>
 </html>
