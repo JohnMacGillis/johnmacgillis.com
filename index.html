@@ -14,246 +14,323 @@
     <meta property="og:url" content="https://johnmacgillis.ca/">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
+    <meta name="theme-color" content="#f7f5f0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&display=swap" rel="stylesheet">
+    <script>document.documentElement.classList.add('js');</script>
     <style>
         :root {
-            --paper: #fbf9f5;
-            --ink: #1a1a1a;
-            --grey: #62605c;
-            --rule: #dcd9d3;
-            --link: #1f4f8f;
-            --wash: #eef3f9;
-            --on-link: #ffffff;
+            --paper: #f7f5f0;
+            --surface: #ffffff;
+            --ink: #121821;
+            --text: #3a414b;
+            --grey: #6b6f76;
+            --rule: #e2ddd3;
+            --navy: #0f2a44;
+            --navy-2: #1a3b5c;
+            --brass: #a8834a;
+            --brass-soft: #d9c39c;
+            --wash: #efebe3;
+            --serif: 'Newsreader', Georgia, 'Times New Roman', serif;
+            --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            --wrap: 1120px;
             color-scheme: light;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; scroll-padding-top: 90px; }
 
         body {
             background: var(--paper);
-            color: var(--ink);
-            font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif;
-            font-size: 1.1875rem;
-            line-height: 1.6;
+            color: var(--text);
+            font-family: var(--sans);
+            font-size: 1.0625rem;
+            line-height: 1.7;
             -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
         }
 
-        .page { max-width: 960px; margin: 0 auto; padding: 0 1.5rem; }
+        .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 2rem; }
 
-        a { color: var(--link); text-underline-offset: 0.18em; text-decoration-thickness: 1px; }
-        a:hover { text-decoration-thickness: 2px; }
+        a { color: var(--navy); text-decoration-color: var(--brass-soft); text-underline-offset: 0.22em; text-decoration-thickness: 1px; transition: text-decoration-color .2s; }
+        a:hover { text-decoration-color: var(--brass); }
 
         p + p { margin-top: 1em; }
 
-        .kicker {
-            display: block;
-            font-variant: all-small-caps; letter-spacing: 0.08em; font-size: 1.15rem;
-            color: var(--link);
+        .eyebrow {
+            display: inline-flex; align-items: center; gap: 0.75rem;
+            font-family: var(--sans); font-size: 0.75rem; font-weight: 600;
+            letter-spacing: 0.18em; text-transform: uppercase; color: var(--brass);
         }
+        .eyebrow::before { content: ""; width: 28px; height: 1px; background: var(--brass); }
+
+        h1, h2, h3 { font-family: var(--serif); color: var(--ink); font-weight: 400; }
+        h2 {
+            font-size: clamp(2rem, 3.6vw, 2.75rem); line-height: 1.12; letter-spacing: -0.015em;
+            margin: 1rem 0 1.5rem; font-weight: 300;
+        }
+        h2 em { font-style: italic; color: var(--navy-2); }
+        h3 { font-size: 1.45rem; line-height: 1.25; margin-bottom: 0.6rem; }
 
         /* buttons */
         .btn {
-            display: inline-flex; align-items: center; gap: 0.5rem; flex-shrink: 0;
-            background: var(--link); color: var(--on-link);
-            padding: 0.55rem 1.05rem; border-radius: 999px;
-            font-size: 1.05rem; font-weight: 600; text-decoration: none; white-space: nowrap;
+            display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem;
+            background: var(--navy); color: #fff;
+            padding: 0.85rem 1.4rem; border-radius: 3px;
+            font-family: var(--sans); font-size: 0.95rem; font-weight: 600; letter-spacing: 0.01em;
+            text-decoration: none; white-space: nowrap;
+            box-shadow: 0 1px 2px rgba(15, 42, 68, .18), 0 6px 18px -8px rgba(15, 42, 68, .45);
+            transition: background .2s, transform .2s, box-shadow .2s;
         }
-        .btn:hover { filter: brightness(1.1); }
-        .btn svg { width: 1.05em; height: 1.05em; fill: currentColor; }
-        .btn.large { padding: 0.8rem 1.5rem; font-size: 1.15rem; }
+        .btn:hover { background: var(--navy-2); transform: translateY(-1px); box-shadow: 0 2px 4px rgba(15, 42, 68, .18), 0 12px 24px -10px rgba(15, 42, 68, .5); }
+        .btn svg { width: 1em; height: 1em; fill: currentColor; }
+        .btn.small { padding: 0.6rem 1rem; font-size: 0.875rem; }
+        .btn.brass { background: var(--brass); box-shadow: 0 1px 2px rgba(0,0,0,.15), 0 8px 20px -10px rgba(168, 131, 74, .7); }
+        .btn.brass:hover { background: #b8925a; }
+        .link-arrow { font-weight: 600; font-size: 0.95rem; text-decoration: none; color: var(--navy); }
+        .link-arrow span { display: inline-block; transition: transform .2s; color: var(--brass); }
+        .link-arrow:hover span { transform: translateX(3px); }
 
-        /* sticky header with the call button top right */
-        .topbar { position: sticky; top: 0; z-index: 10; background: var(--paper); }
-        .masthead {
-            display: flex; justify-content: space-between; align-items: center; gap: 1rem;
-            padding: 1.1rem 0 0.9rem; border-bottom: 1px solid var(--ink);
+        /* header */
+        .topbar {
+            position: sticky; top: 0; z-index: 20;
+            background: rgba(247, 245, 240, 0.86);
+            -webkit-backdrop-filter: saturate(1.4) blur(12px); backdrop-filter: saturate(1.4) blur(12px);
+            border-bottom: 1px solid transparent; transition: border-color .3s;
         }
-        .masthead .name { font-size: 1.35rem; font-weight: 600; letter-spacing: -0.01em; }
-        .masthead .name small { display: block; font-size: 0.95rem; font-weight: 400; color: var(--grey); letter-spacing: 0; }
-        .double { border-bottom: 3px solid var(--link); margin-top: 3px; }
+        .topbar.scrolled { border-bottom-color: var(--rule); }
+        .masthead { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; height: 76px; }
+        .brand { font-family: var(--serif); font-size: 1.35rem; color: var(--ink); text-decoration: none; letter-spacing: -0.01em; }
+        .brand span { color: var(--brass); }
+        .nav { display: flex; align-items: center; gap: 2rem; }
+        .nav a.navlink { font-size: 0.9rem; font-weight: 500; color: var(--text); text-decoration: none; }
+        .nav a.navlink:hover { color: var(--navy); }
         .btn .short { display: none; }
 
         /* hero */
-        .intro {
-            display: grid; grid-template-columns: 1fr 220px; gap: 3.5rem; align-items: center;
-            padding: 4rem 0 3.75rem;
-        }
+        .hero { padding-top: 5.5rem; padding-bottom: 4.5rem; }
+        .hero-grid { display: grid; grid-template-columns: 1.35fr 0.65fr; gap: 5rem; align-items: center; }
         h1 {
-            font-size: clamp(2.3rem, 5vw, 3.4rem); font-weight: 300; line-height: 1.08; letter-spacing: -0.02em;
-            margin: 0.6rem 0 1.5rem;
+            font-size: clamp(2.7rem, 5.8vw, 4.6rem); font-weight: 300; line-height: 1.02; letter-spacing: -0.025em;
+            margin: 1.5rem 0 1.75rem;
         }
-        h1 em { font-style: italic; color: var(--link); }
-        .intro .lede { font-size: 1.3rem; line-height: 1.5; max-width: 34em; }
-        .intro .sub { color: var(--grey); margin-top: 1em; max-width: 36em; }
-        .cta { display: flex; align-items: center; flex-wrap: wrap; gap: 0.75rem 1.25rem; margin-top: 2rem; }
-        .cta .alt { font-size: 1.05rem; color: var(--grey); }
-        figure { position: relative; }
-        figure::before {
-            content: ""; position: absolute; inset: 0; aspect-ratio: 4 / 5;
-            transform: translate(-10px, 10px); border: 1px solid var(--link); z-index: 0;
-        }
-        figure img { position: relative; z-index: 1; display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; filter: grayscale(0.15); }
+        h1 em { font-style: italic; color: var(--navy-2); }
+        .lede { font-size: 1.2rem; line-height: 1.6; color: var(--text); max-width: 33em; }
+        .sub { color: var(--grey); margin-top: 1.1em; max-width: 34em; font-size: 1rem; }
+        .cta { display: flex; align-items: center; flex-wrap: wrap; gap: 1rem 1.75rem; margin-top: 2.5rem; }
 
-        /* tinted bands */
-        .band { background: var(--wash); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
-        .stats { display: grid; grid-template-columns: repeat(4, 1fr); }
-        .stat { padding: 2.5rem 1.5rem 2.75rem; }
-        .stat:first-child { padding-left: 0; }
-        .stat:last-child { padding-right: 0; }
-        .stat + .stat { border-left: 1px solid var(--rule); }
-        .num {
-            display: block; font-size: 2.6rem; font-weight: 300; line-height: 1.1; color: var(--link);
-            font-variant-numeric: lining-nums;
+        .portrait { position: relative; justify-self: end; width: 100%; max-width: 320px; }
+        .portrait .photo { position: relative; }
+        .portrait .photo::before {
+            content: ""; position: absolute; inset: 0;
+            transform: translate(16px, 16px); border: 1px solid var(--brass-soft);
         }
-        .stat p { font-size: 1rem; color: var(--grey); margin-top: 0.5rem; line-height: 1.45; }
+        .portrait img {
+            position: relative; display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover;
+            box-shadow: 0 30px 60px -30px rgba(18, 24, 33, .45);
+        }
+        .portrait figcaption {
+            position: relative; margin-top: 1.6rem; font-size: 0.8rem; letter-spacing: 0.04em; color: var(--grey);
+        }
+        .portrait figcaption strong { display: block; font-family: var(--serif); font-size: 1.05rem; font-weight: 400; color: var(--ink); letter-spacing: 0; }
+
+        /* stats */
+        .stats { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+        .stat { padding: 2.25rem 2rem 2.25rem 0; }
+        .stat + .stat { padding-left: 2rem; border-left: 1px solid var(--rule); }
+        .num {
+            display: block; font-family: var(--serif); font-weight: 300; font-size: 3rem; line-height: 1;
+            color: var(--navy); letter-spacing: -0.02em; font-variant-numeric: lining-nums;
+        }
+        .stat p { font-size: 0.875rem; color: var(--grey); margin-top: 0.75rem; line-height: 1.5; }
 
         /* sections */
-        section { padding: 5rem 0 0; }
-        h2 { font-size: 1.75rem; font-weight: 600; line-height: 1.25; margin: 0.25rem 0 1.1rem; }
-        h3 { font-size: 1.25rem; font-weight: 600; line-height: 1.3; margin-bottom: 0.45rem; }
-        .two { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; }
+        section.wrap { padding-top: 7rem; }
+        .section-head { max-width: 46rem; }
+        .section-head p { font-size: 1.1rem; }
 
         /* featured work */
-        .case-grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: 3rem; align-items: start; margin-top: 0.5rem; }
-        .case { border-left: 3px solid var(--link); padding-left: 1.5rem; }
-        .case dt { font-variant: all-small-caps; letter-spacing: 0.08em; color: var(--grey); font-size: 1.05rem; }
-        .case dd { margin: 0.1rem 0 1.25rem; }
-        .case dd:last-child { margin-bottom: 0; }
+        .case-grid { display: grid; grid-template-columns: 1.25fr 0.75fr; gap: 4rem; align-items: start; margin-top: 3rem; }
+        .case { counter-reset: case; }
+        .case-row { display: grid; grid-template-columns: 9rem 1fr; gap: 1.5rem; padding: 1.5rem 0; border-top: 1px solid var(--rule); }
+        .case-row:last-of-type { border-bottom: 1px solid var(--rule); }
+        .case-row dt {
+            font-size: 0.75rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--grey);
+            padding-top: 0.3rem;
+        }
+        .case-row dd { font-size: 1.05rem; }
+        .note { color: var(--grey); font-size: 0.875rem; margin-top: 1.25rem; font-style: italic; font-family: var(--serif); font-size: 1rem; }
+
         .result {
-            background: var(--wash); border: 1px solid var(--rule); padding: 2rem 1.75rem;
+            position: sticky; top: 110px;
+            background: var(--navy); color: #c9d3de;
+            padding: 2.5rem 2.25rem; border-radius: 4px;
+            background-image: radial-gradient(120% 80% at 100% 0%, rgba(168, 131, 74, .22), transparent 60%);
+            box-shadow: 0 40px 80px -40px rgba(15, 42, 68, .6);
         }
-        .result .num { font-size: 3.75rem; line-height: 1; }
-        .result .label { font-size: 1.1rem; margin-top: 0.5rem; }
-        .result ul { list-style: none; margin-top: 1.5rem; border-top: 1px solid var(--rule); }
-        .result li { padding: 0.6rem 0; border-bottom: 1px solid var(--rule); font-size: 1rem; color: var(--grey); }
-        .result li strong { color: var(--ink); font-weight: 600; }
-        .note { color: var(--grey); font-style: italic; margin-top: 1.25rem; font-size: 1rem; }
+        .result .eyebrow { color: var(--brass-soft); }
+        .result .eyebrow::before { background: var(--brass-soft); }
+        .result .num { color: #fff; font-size: 4.5rem; margin-top: 1.25rem; }
+        .result .label { color: #e7ecf2; font-family: var(--serif); font-size: 1.25rem; margin-top: 0.5rem; }
+        .result ul { list-style: none; margin-top: 2rem; }
+        .result li { display: flex; gap: 0.9rem; padding: 0.85rem 0; border-top: 1px solid rgba(255, 255, 255, .12); font-size: 0.95rem; line-height: 1.5; }
+        .result li strong { color: #fff; font-weight: 600; }
+        .result li::before { content: ""; flex: 0 0 6px; height: 6px; margin-top: 0.55rem; border-radius: 50%; background: var(--brass); }
 
-        /* what I build */
-        .builds { display: grid; grid-template-columns: 1fr 1fr; gap: 0 3rem; margin-top: 1.5rem; border-top: 1px solid var(--rule); }
-        .build { padding: 1.6rem 0; border-bottom: 1px solid var(--rule); }
-        .build p { font-size: 1.05rem; }
-
-        .trust {
-            display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
-            margin-top: 2rem; padding: 1.5rem 1.75rem; background: var(--wash); border: 1px solid var(--rule);
+        /* services */
+        .services { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 3rem; }
+        .service {
+            background: var(--surface); border: 1px solid var(--rule); border-radius: 4px;
+            padding: 2.25rem 2.25rem 2.5rem;
+            transition: transform .25s, box-shadow .25s, border-color .25s;
         }
-        .trust div { font-size: 1.05rem; line-height: 1.4; }
-        .trust strong { display: block; font-weight: 600; }
-        .trust span { color: var(--grey); font-size: 0.98rem; }
+        .service:hover { transform: translateY(-3px); border-color: var(--brass-soft); box-shadow: 0 24px 48px -28px rgba(18, 24, 33, .35); }
+        .service .idx { display: block; font-family: var(--serif); font-style: italic; font-size: 1.1rem; color: var(--brass); margin-bottom: 1.5rem; }
+        .service p { font-size: 1rem; }
 
-        /* fit + how I work */
-        .fit ul { list-style: none; margin-top: 0.5rem; font-size: 1.1rem; }
-        .fit li { position: relative; padding-left: 1.4rem; }
-        .fit li + li { margin-top: 0.75rem; }
-        .fit li::before { content: "\2192"; position: absolute; left: 0; color: var(--link); }
+        .trust { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; margin-top: 3.5rem; padding-top: 2.5rem; border-top: 1px solid var(--rule); }
+        .trust div { display: grid; grid-template-columns: 2.25rem 1fr; column-gap: 0.25rem; }
+        .trust svg { width: 1.4rem; height: 1.4rem; stroke: var(--brass); fill: none; stroke-width: 1.5; grid-row: span 2; margin-top: 0.2rem; }
+        .trust strong { font-family: var(--serif); font-size: 1.2rem; font-weight: 400; color: var(--ink); line-height: 1.3; }
+        .trust span { color: var(--grey); font-size: 0.925rem; line-height: 1.55; margin-top: 0.3rem; }
 
-        .steps { list-style: none; margin-top: 0.5rem; counter-reset: step; }
-        .steps li { counter-increment: step; position: relative; padding-left: 2.75rem; font-size: 1.1rem; }
-        .steps li + li { margin-top: 1rem; }
-        .steps li::before {
-            content: counter(step); position: absolute; left: 0; top: -0.15rem;
-            font-size: 1.9rem; font-weight: 300; font-style: italic; color: var(--link); line-height: 1;
-        }
-        .steps strong { font-weight: 600; }
+        /* fit + how */
+        .two { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; }
+        .fit ul { list-style: none; }
+        .fit li { padding: 1.1rem 0 1.1rem 2.25rem; border-top: 1px solid var(--rule); position: relative; font-family: var(--serif); font-size: 1.3rem; line-height: 1.4; color: var(--ink); }
+        .fit li:last-child { border-bottom: 1px solid var(--rule); }
+        .fit li::before { content: "\2192"; position: absolute; left: 0; top: 1.1rem; color: var(--brass); font-family: var(--sans); font-size: 1.1rem; }
+
+        .steps { list-style: none; counter-reset: step; }
+        .steps li { counter-increment: step; display: grid; grid-template-columns: 3rem 1fr; padding: 1.1rem 0; border-top: 1px solid var(--rule); }
+        .steps li:last-child { border-bottom: 1px solid var(--rule); }
+        .steps li::before { content: "0" counter(step); font-family: var(--serif); font-style: italic; font-size: 1.1rem; color: var(--brass); padding-top: 0.15rem; }
+        .steps strong { display: block; font-family: var(--serif); font-weight: 400; font-size: 1.3rem; color: var(--ink); line-height: 1.35; }
+        .steps span { font-size: 0.975rem; color: var(--text); }
 
         /* about */
-        .cv { border-top: 1px solid var(--rule); font-size: 1.02rem; margin-top: 2.6rem; }
-        .cv div { display: flex; gap: 1.25rem; padding: 0.6rem 0; border-bottom: 1px solid var(--rule); }
-        .cv .yr { flex: 0 0 5.5rem; color: var(--grey); font-variant-numeric: oldstyle-nums; }
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+        .about-grid .bio p { font-size: 1.05rem; }
+        .cv { margin-top: 0.5rem; }
+        .cv div { display: grid; grid-template-columns: 6.5rem 1fr; gap: 1.25rem; padding: 0.95rem 0; border-top: 1px solid var(--rule); font-size: 0.95rem; }
+        .cv div:last-child { border-bottom: 1px solid var(--rule); }
+        .cv .yr { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--grey); padding-top: 0.2rem; }
+        .cv .role { color: var(--ink); }
 
-        /* contact band */
-        .contact-band { margin-top: 5rem; border-top: 3px solid var(--link); }
-        .contact { display: grid; grid-template-columns: 1.5fr 1fr; gap: 3rem; align-items: center; padding: 3.5rem 0; }
-        .contact .big {
-            font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 300; line-height: 1.2; letter-spacing: -0.01em;
-            margin: 0.5rem 0 1rem;
+        /* contact */
+        .contact-band { margin-top: 7rem; background: var(--wash); border-top: 1px solid var(--rule); }
+        .contact { display: grid; grid-template-columns: 1.3fr 0.7fr; gap: 4rem; align-items: end; padding-top: 6rem; padding-bottom: 5rem; }
+        .contact h2 { font-size: clamp(2.4rem, 5vw, 3.75rem); margin-bottom: 1.25rem; }
+        .contact h2 a { font-style: italic; color: var(--navy-2); white-space: nowrap; text-decoration: none; border-bottom: 1px solid var(--brass-soft); }
+        .contact h2 a:hover { border-bottom-color: var(--brass); }
+        .contact .side { display: flex; flex-direction: column; gap: 0.25rem; }
+        .contact .side .btn { margin-bottom: 1rem; }
+        .contact .side a:not(.btn) { display: flex; justify-content: space-between; padding: 0.7rem 0; border-top: 1px solid var(--rule); font-size: 0.95rem; text-decoration: none; color: var(--ink); }
+        .contact .side a:not(.btn):last-child { border-bottom: 1px solid var(--rule); }
+        .contact .side a:not(.btn) span { color: var(--brass); transition: transform .2s; }
+        .contact .side a:not(.btn):hover span { transform: translateX(3px); }
+
+        footer { background: var(--wash); }
+        footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem 1.5rem; padding-top: 1.5rem; padding-bottom: 2.5rem; border-top: 1px solid var(--rule); font-size: 0.85rem; color: var(--grey); }
+        footer a { color: var(--grey); text-decoration: none; }
+        footer a:hover { color: var(--navy); }
+
+        /* quiet entrance */
+        .js .reveal { opacity: 0; transform: translateY(14px); transition: opacity .8s ease, transform .8s ease; }
+        .js .reveal.in { opacity: 1; transform: none; }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            .js .reveal { opacity: 1; transform: none; transition: none; }
+            .btn, .service { transition: none; }
         }
-        .contact .big a { font-style: italic; white-space: nowrap; }
-        .contact .side { display: flex; flex-direction: column; align-items: flex-start; gap: 0.6rem; font-size: 1.05rem; }
 
-        footer {
-            padding: 1.25rem 0 3rem;
-            font-size: 0.95rem; color: var(--grey);
-            display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem 1rem;
+        @media (max-width: 980px) {
+            .nav a.navlink { display: none; }
+            .hero-grid { gap: 3rem; }
+            .case-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+            .result { position: static; }
         }
-        footer a { color: var(--grey); }
-
         @media (max-width: 760px) {
-            body { font-size: 1.0625rem; }
-            .masthead .name small { display: none; }
-            .btn { padding: 0.5rem 0.9rem; font-size: 1rem; }
-            .btn.large { padding: 0.75rem 1.25rem; font-size: 1.05rem; }
-            .intro { grid-template-columns: 1fr; gap: 2rem; padding: 2.5rem 0 3rem; }
-            figure { order: -1; width: 130px; }
-            figure img, figure::before { aspect-ratio: 1; }
-            figure::before { transform: translate(6px, 6px); }
-            .intro .lede { font-size: 1.15rem; }
+            body { font-size: 1rem; }
+            .wrap { padding: 0 1.25rem; }
+            .masthead { height: 64px; }
+            .brand { font-size: 1.2rem; }
+            .hero { padding-top: 2.5rem; padding-bottom: 3rem; }
+            .hero-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .portrait { order: -1; justify-self: start; max-width: 140px; }
+            .portrait img { aspect-ratio: 1; }
+            .portrait .photo::before { transform: translate(8px, 8px); }
+            .portrait figcaption { display: none; }
+            h1 { margin: 1.1rem 0 1.25rem; }
+            .lede { font-size: 1.1rem; }
+            .cta { margin-top: 1.75rem; }
             .stats { grid-template-columns: 1fr 1fr; }
-            .stat, .stat:first-child, .stat:last-child { padding: 1.75rem 1rem 1.75rem 0; }
-            .stat:nth-child(even) { padding-left: 1rem; }
-            .stat + .stat { border-left: 0; }
-            .stat:nth-child(even) { border-left: 1px solid var(--rule); }
+            .stat, .stat + .stat { padding: 1.5rem 1rem 1.5rem 0; border-left: 0; }
+            .stat:nth-child(even) { padding-left: 1rem; border-left: 1px solid var(--rule); }
             .stat:nth-child(n+3) { border-top: 1px solid var(--rule); }
-            .num { font-size: 2rem; }
-            section { padding-top: 3.5rem; }
-            .two, .case-grid, .builds, .contact { grid-template-columns: 1fr; }
-            .two, .case-grid { gap: 2.5rem; }
-            .contact { gap: 1.5rem; padding: 2.5rem 0; }
-            .trust { grid-template-columns: 1fr; gap: 1rem; padding: 1.25rem; }
-            .result .num { font-size: 3rem; }
-            .cv { margin-top: 0; }
-            .cv div { flex-direction: column; gap: 0; }
-            .cv .yr { flex: none; font-size: 0.95rem; }
+            .num { font-size: 2.25rem; }
+            section.wrap { padding-top: 4.5rem; }
+            .case-row { grid-template-columns: 1fr; gap: 0.35rem; }
+            .result { padding: 2rem 1.5rem; }
+            .result .num { font-size: 3.5rem; }
+            .services { grid-template-columns: 1fr; gap: 1rem; }
+            .service { padding: 1.75rem 1.5rem 2rem; }
+            .trust { grid-template-columns: 1fr; gap: 1.5rem; margin-top: 2.5rem; }
+            .two, .about-grid { grid-template-columns: 1fr; gap: 3.5rem; }
+            .fit li, .steps strong { font-size: 1.15rem; }
+            .contact-band { margin-top: 4.5rem; }
+            .contact { grid-template-columns: 1fr; gap: 2rem; padding-top: 3.5rem; padding-bottom: 3rem; }
         }
         @media (max-width: 600px) {
             .btn .full { display: none; }
             .btn .short { display: inline; }
-            .btn.large .full { display: inline; }
-            .btn.large .short { display: none; }
+            .btn.keep .full { display: inline; }
+            .btn.keep .short { display: none; }
         }
     </style>
 </head>
 <body>
 
-<header class="topbar">
-    <div class="page">
-        <div class="masthead">
-            <span class="name">John MacGillis<small>Software &amp; automation &middot; Halifax, Nova Scotia</small></span>
-            <a class="btn" href="tel:+19024034993" aria-label="Call or text John at 902-403-4993">
+<header class="topbar" id="top">
+    <div class="wrap masthead">
+        <a class="brand" href="#top">John MacGillis<span>.</span></a>
+        <nav class="nav" aria-label="Main">
+            <a class="navlink" href="#work">Work</a>
+            <a class="navlink" href="#services">Services</a>
+            <a class="navlink" href="#about">About</a>
+            <a class="btn small" href="tel:+19024034993" aria-label="Call or text John at 902-403-4993">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>
                 <span class="full">Call or text 902-403-4993</span><span class="short">Call or text</span>
             </a>
-        </div>
-        <div class="double"></div>
+        </nav>
     </div>
 </header>
 
-<div class="page">
-    <div class="intro">
-        <div>
-            <span class="kicker">Software &amp; automation for professional firms</span>
-            <h1>I build the software that does <em>your firm&rsquo;s paperwork.</em></h1>
-            <p class="lede">Intake, document drafting, requests and follow-ups, and reporting, connected to the systems you already use, so skilled people can get back to skilled work.</p>
-            <p class="sub">I learned how inside a large regional law firm, where I ran growth and led the team that built its in-house software.</p>
-            <div class="cta">
-                <a class="btn large" href="tel:+19024034993">
-                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>
-                    <span class="full">Call or text 902-403-4993</span>
-                </a>
-                <span class="alt">or email <a href="mailto:john@johnmacgillis.ca">john@johnmacgillis.ca</a></span>
+<main>
+    <div class="wrap hero">
+        <div class="hero-grid">
+            <div>
+                <span class="eyebrow">Software &amp; automation for professional firms</span>
+                <h1>I build the software that does <em>your firm&rsquo;s paperwork.</em></h1>
+                <p class="lede">Intake, document drafting, requests and follow-ups, and reporting, connected to the systems you already use, so skilled people can get back to skilled work.</p>
+                <p class="sub">I learned how inside a large regional law firm, where I ran growth and led the team that built its in-house software.</p>
+                <div class="cta">
+                    <a class="btn keep" href="tel:+19024034993">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>
+                        <span class="full">Call or text 902-403-4993</span>
+                    </a>
+                    <a class="link-arrow" href="#work">See the work <span>&rarr;</span></a>
+                </div>
             </div>
+            <figure class="portrait">
+                <div class="photo"><img src="Headshot.jpg" alt="John MacGillis"></div>
+                <figcaption><strong>John MacGillis</strong>Halifax, Nova Scotia</figcaption>
+            </figure>
         </div>
-        <figure>
-            <img src="Headshot.jpg" alt="John MacGillis">
-        </figure>
     </div>
-</div>
 
-<div class="band">
-    <div class="page">
+    <div class="wrap">
         <div class="stats">
             <div class="stat"><span class="num">10,000+</span><p>requests sent automatically in four months</p></div>
             <div class="stat"><span class="num">29</span><p>production services built for one firm</p></div>
@@ -261,132 +338,175 @@
             <div class="stat"><span class="num">$600K</span><p>a month in advertising managed, so I know what a client costs to win</p></div>
         </div>
     </div>
-</div>
 
-<div class="page">
-
-    <section>
-        <span class="kicker">Featured work</span>
-        <h2>An automated records desk for a large regional law firm</h2>
+    <section class="wrap" id="work">
+        <div class="section-head reveal">
+            <span class="eyebrow">Featured work</span>
+            <h2>An automated records desk for <em>a large regional law firm</em></h2>
+        </div>
         <div class="case-grid">
-            <div>
+            <div class="reveal">
                 <dl class="case">
-                    <dt>The problem</dt>
-                    <dd>Staff at a firm operating in four provinces were preparing thousands of records requests to hospitals, clinics, insurers and government offices by hand. Whether a follow-up went out depended on someone remembering, and more clients meant hiring more assistants.</dd>
-                    <dt>What we built</dt>
-                    <dd>A system connected to the firm&rsquo;s case-management software. It reads plain-language requests, matches them against a directory of 30,000 contacts, assembles the right forms with signatures, sends them, tracks replies, and follows up automatically with escalating letters.</dd>
-                    <dt>The result</dt>
-                    <dd>Follow-ups send themselves, and the system alerts the team when something needs a person.</dd>
+                    <div class="case-row">
+                        <dt>The problem</dt>
+                        <dd>Staff at a firm operating in four provinces were preparing thousands of records requests to hospitals, clinics, insurers and government offices by hand. Whether a follow-up went out depended on someone remembering, and more clients meant hiring more assistants.</dd>
+                    </div>
+                    <div class="case-row">
+                        <dt>What we built</dt>
+                        <dd>A system connected to the firm&rsquo;s case-management software. It reads plain-language requests, matches them against a directory of 30,000 contacts, assembles the right forms with signatures, sends them, tracks replies, and follows up automatically with escalating letters.</dd>
+                    </div>
+                    <div class="case-row">
+                        <dt>The result</dt>
+                        <dd>Follow-ups send themselves, and the system alerts the team when something needs a person.</dd>
+                    </div>
                 </dl>
                 <p class="note">Built with a second developer as part of a 29-service platform designed to replace the firm&rsquo;s case-management software.</p>
             </div>
-            <aside class="result">
+            <aside class="result reveal" aria-label="Results">
+                <span class="eyebrow">In production</span>
                 <span class="num">10,000+</span>
                 <p class="label">requests sent in four months</p>
                 <ul>
-                    <li><strong>30,000</strong> contacts matched automatically</li>
-                    <li><strong>Fax, email, mail</strong> and government portals</li>
-                    <li><strong>4 provinces</strong> of forms and consent rules</li>
-                    <li><strong>Automatic</strong> escalating follow-ups</li>
+                    <li><span><strong>30,000</strong> contacts matched automatically</span></li>
+                    <li><span><strong>Fax, email, mail</strong> and government portals</span></li>
+                    <li><span><strong>4 provinces</strong> of forms and consent rules</span></li>
+                    <li><span><strong>Escalating follow-ups</strong> that send themselves</span></li>
                 </ul>
             </aside>
         </div>
     </section>
 
-    <section>
-        <span class="kicker">What I build</span>
-        <h2>Tools that do the preparation, so your people can make the decisions</h2>
-        <div class="builds">
-            <div class="build">
+    <section class="wrap" id="services">
+        <div class="section-head reveal">
+            <span class="eyebrow">What I build</span>
+            <h2>Tools that do the preparation, <em>so your people can make the decisions</em></h2>
+        </div>
+        <div class="services">
+            <div class="service reveal">
+                <span class="idx">01</span>
                 <h3>Requests and follow-ups that run themselves</h3>
                 <p>Type a request in plain language. The system picks the right recipient, forms and signatures, sends it by email, fax or mail, then follows up on its own until the answer arrives.</p>
             </div>
-            <div class="build">
+            <div class="service reveal">
+                <span class="idx">02</span>
                 <h3>AI document review you can check</h3>
                 <p>AI reads long files such as records, contracts and statements and drafts summaries and timelines. Every line links back to the page it came from.</p>
             </div>
-            <div class="build">
+            <div class="service reveal">
+                <span class="idx">03</span>
                 <h3>Documents drafted from your data</h3>
                 <p>Letters, forms, filings and reports in your house style, ready for a professional to review and sign.</p>
             </div>
-            <div class="build">
+            <div class="service reveal">
+                <span class="idx">04</span>
                 <h3>Systems that talk to each other</h3>
                 <p>Practice management, accounting, Microsoft 365, Teams, phone and fax, connected instead of re-typed. Outgrown a vendor? I&rsquo;ll get your data out and build what&rsquo;s missing.</p>
             </div>
         </div>
-        <div class="trust">
-            <div><strong>Hosted in Canada</strong><span>On your own cloud account, under your control.</span></div>
-            <div><strong>Your data never trains AI</strong><span>Client files are processed, never used to train models.</span></div>
-            <div><strong>A person approves everything</strong><span>Nothing goes to a client, court or third party without sign-off.</span></div>
+        <div class="trust reveal">
+            <div>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-4.5-7-10.5V5l7-2.5L19 5v5.5C19 16.5 12 21 12 21z"/><path d="M9 11.5l2 2 4-4"/></svg>
+                <strong>Hosted in Canada</strong>
+                <span>On your own cloud account, under your control.</span>
+            </div>
+            <div>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10.5" width="14" height="10" rx="1.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg>
+                <strong>Your data never trains AI</strong>
+                <span>Client files are processed, never used to train models.</span>
+            </div>
+            <div>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 20.5c.8-3.6 3.6-5.5 7-5.5s6.2 1.9 7 5.5"/></svg>
+                <strong>A person approves everything</strong>
+                <span>Nothing goes to a client, court or third party without sign-off.</span>
+            </div>
         </div>
     </section>
 
-    <section class="two">
-        <div class="fit">
-            <span class="kicker">A good fit if</span>
-            <h2>You&rsquo;ll recognize these</h2>
+    <section class="wrap two">
+        <div class="fit reveal">
+            <span class="eyebrow">A good fit if</span>
+            <h2>You&rsquo;ll <em>recognize these</em></h2>
             <ul>
                 <li>Your staff re-type the same information into three different systems</li>
                 <li>Chasing documents from third parties is someone&rsquo;s full-time job</li>
                 <li>Taking on more work means hiring another assistant</li>
             </ul>
         </div>
-        <div>
-            <span class="kicker">How I work</span>
-            <h2>Practical, honest, built to last</h2>
+        <div class="reveal">
+            <span class="eyebrow">How I work</span>
+            <h2>Practical, honest, <em>built to last</em></h2>
             <ol class="steps">
-                <li><strong>Find the bottleneck.</strong> A short conversation about where your team loses the most time, and an honest answer on whether software will fix it.</li>
-                <li><strong>Build around what you have.</strong> No new platform to adopt. I connect to the systems you already pay for.</li>
-                <li><strong>Run it like production.</strong> Tested before every release and monitored, with alerts when something needs attention.</li>
+                <li><span><strong>Find the bottleneck</strong>A short conversation about where your team loses the most time, and an honest answer on whether software will fix it.</span></li>
+                <li><span><strong>Build around what you have</strong>No new platform to adopt. I connect to the systems you already pay for.</span></li>
+                <li><span><strong>Run it like production</strong>Tested before every release and monitored, with alerts when something needs attention.</span></li>
             </ol>
         </div>
     </section>
 
-    <section class="two">
-        <div>
-            <span class="kicker">About</span>
-            <h2>Business side first, then the code</h2>
-            <p>As Director of Growth at a large Atlantic Canadian law firm, I ran about $600K a month in advertising and led a seven-person team across growth and technology. That&rsquo;s why the software I build starts from how a firm actually makes money, not from a list of features.</p>
-            <p>I trained as a journalist at Carleton, which is mostly why I start every project by asking a lot of questions.</p>
-        </div>
-        <div class="cv">
-            <div><span class="yr">2025&ndash;26</span><span>Director of Growth, regional law firm (Atlantic Canada)</span></div>
-            <div><span class="yr">2023&ndash;25</span><span>Director of Marketing; Digital Marketing Strategist, same firm</span></div>
-            <div><span class="yr">2022&ndash;23</span><span>Communications &amp; Projects Advisor, Nova Scotia Barristers&rsquo; Society</span></div>
-            <div><span class="yr">Education</span><span>Master of Journalism and Bachelor of Journalism (minor in Business), Carleton University</span></div>
-            <div><span class="yr">Stack</span><span>Python, FastAPI, React, TypeScript, Azure, Claude AI, Microsoft Graph, Xero</span></div>
+    <section class="wrap" id="about">
+        <div class="about-grid">
+            <div class="bio reveal">
+                <span class="eyebrow">About</span>
+                <h2>Business side first, <em>then the code</em></h2>
+                <p>As Director of Growth at a large Atlantic Canadian law firm, I ran about $600K a month in advertising and led a seven-person team across growth and technology. That&rsquo;s why the software I build starts from how a firm actually makes money, not from a list of features.</p>
+                <p>I trained as a journalist at Carleton, which is mostly why I start every project by asking a lot of questions.</p>
+            </div>
+            <div class="cv reveal">
+                <div><span class="yr">2025&ndash;26</span><span class="role">Director of Growth, regional law firm (Atlantic Canada)</span></div>
+                <div><span class="yr">2023&ndash;25</span><span class="role">Director of Marketing; Digital Marketing Strategist, same firm</span></div>
+                <div><span class="yr">2022&ndash;23</span><span class="role">Communications &amp; Projects Advisor, Nova Scotia Barristers&rsquo; Society</span></div>
+                <div><span class="yr">Education</span><span class="role">Master of Journalism and Bachelor of Journalism (minor in Business), Carleton University</span></div>
+                <div><span class="yr">Stack</span><span class="role">Python, FastAPI, React, TypeScript, Azure, Claude AI, Microsoft Graph, Xero</span></div>
+            </div>
         </div>
     </section>
+</main>
 
-</div>
-
-<div class="band contact-band">
-    <div class="page">
-        <div class="contact">
-            <div>
-                <span class="kicker">Get in touch</span>
-                <p class="big">Call or text me at <a href="tel:+19024034993">902-403-4993</a></p>
-                <p>Tell me where your team is losing time, and I&rsquo;ll tell you honestly whether software will fix it.</p>
-            </div>
-            <div class="side">
-                <a class="btn large" href="tel:+19024034993">
-                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>
-                    <span class="full">Call 902-403-4993</span>
-                </a>
-                <a href="sms:+19024034993">Send a text</a>
-                <a href="mailto:john@johnmacgillis.ca">john@johnmacgillis.ca</a>
-                <a href="https://www.linkedin.com/in/john-macgillis-073236158/" target="_blank" rel="noopener">LinkedIn</a>
-            </div>
+<div class="contact-band" id="contact">
+    <div class="wrap contact">
+        <div class="reveal">
+            <span class="eyebrow">Get in touch</span>
+            <h2>Call or text me at <a href="tel:+19024034993">902-403-4993</a></h2>
+            <p>Tell me where your team is losing time, and I&rsquo;ll tell you honestly whether software will fix it.</p>
+        </div>
+        <div class="side reveal">
+            <a class="btn keep" href="tel:+19024034993">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>
+                <span class="full">Call 902-403-4993</span>
+            </a>
+            <a href="sms:+19024034993">Send a text <span>&rarr;</span></a>
+            <a href="mailto:john@johnmacgillis.ca">john@johnmacgillis.ca <span>&rarr;</span></a>
+            <a href="https://www.linkedin.com/in/john-macgillis-073236158/" target="_blank" rel="noopener">LinkedIn <span>&rarr;</span></a>
         </div>
     </div>
 </div>
 
-<div class="page">
-    <footer>
+<footer>
+    <div class="wrap">
         <span>&copy; 2026 John MacGillis &middot; Halifax, Nova Scotia</span>
         <span><a href="tel:+19024034993">902-403-4993</a> &middot; <a href="mailto:john@johnmacgillis.ca">Email</a> &middot; <a href="https://www.linkedin.com/in/john-macgillis-073236158/" target="_blank" rel="noopener">LinkedIn</a></span>
-    </footer>
-</div>
+    </div>
+</footer>
 
+<script>
+    (function () {
+        var bar = document.querySelector('.topbar');
+        var onScroll = function () { bar.classList.toggle('scrolled', window.scrollY > 8); };
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+
+        var items = document.querySelectorAll('.reveal');
+        if (!('IntersectionObserver' in window)) {
+            items.forEach(function (el) { el.classList.add('in'); });
+            return;
+        }
+        var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+                if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+            });
+        }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+        items.forEach(function (el) { io.observe(el); });
+    })();
+</script>
 </body>
 </html>
