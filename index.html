@@ -41,7 +41,6 @@
         }
 
         .page { max-width: 960px; margin: 0 auto; padding: 0 1.5rem; }
-        .narrow { max-width: 680px; }
 
         a { color: var(--link); text-underline-offset: 0.18em; text-decoration-thickness: 1px; }
         a:hover { text-decoration-thickness: 2px; }
@@ -49,15 +48,24 @@
         p + p { margin-top: 1em; }
 
         .kicker {
+            display: block;
             font-variant: all-small-caps; letter-spacing: 0.08em; font-size: 1.15rem;
             color: var(--link);
         }
 
-        /* sticky header with the call button top right */
-        .topbar {
-            position: sticky; top: 0; z-index: 10;
-            background: var(--paper);
+        /* buttons */
+        .btn {
+            display: inline-flex; align-items: center; gap: 0.5rem; flex-shrink: 0;
+            background: var(--link); color: var(--on-link);
+            padding: 0.55rem 1.05rem; border-radius: 999px;
+            font-size: 1.05rem; font-weight: 600; text-decoration: none; white-space: nowrap;
         }
+        .btn:hover { filter: brightness(1.1); }
+        .btn svg { width: 1.05em; height: 1.05em; fill: currentColor; }
+        .btn.large { padding: 0.8rem 1.5rem; font-size: 1.15rem; }
+
+        /* sticky header with the call button top right */
+        .topbar { position: sticky; top: 0; z-index: 10; background: var(--paper); }
         .masthead {
             display: flex; justify-content: space-between; align-items: center; gap: 1rem;
             padding: 1.1rem 0 0.9rem; border-bottom: 1px solid var(--ink);
@@ -65,101 +73,109 @@
         .masthead .name { font-size: 1.35rem; font-weight: 600; letter-spacing: -0.01em; }
         .masthead .name small { display: block; font-size: 0.95rem; font-weight: 400; color: var(--grey); letter-spacing: 0; }
         .double { border-bottom: 3px solid var(--link); margin-top: 3px; }
-        .call {
-            display: inline-flex; align-items: center; gap: 0.5rem; flex-shrink: 0;
-            background: var(--link); color: var(--on-link);
-            padding: 0.55rem 1.05rem; border-radius: 999px;
-            font-size: 1.05rem; font-weight: 600; text-decoration: none; white-space: nowrap;
-        }
-        .call:hover { filter: brightness(1.1); }
-        .call svg { width: 1.05em; height: 1.05em; fill: currentColor; }
-        .call .short { display: none; }
+        .btn .short { display: none; }
 
-        /* intro */
+        /* hero */
         .intro {
-            display: grid; grid-template-columns: 1fr 220px; gap: 3.5rem; align-items: end;
-            padding: 4.5rem 0 4rem;
+            display: grid; grid-template-columns: 1fr 220px; gap: 3.5rem; align-items: center;
+            padding: 4rem 0 3.75rem;
         }
         h1 {
             font-size: clamp(2.3rem, 5vw, 3.4rem); font-weight: 300; line-height: 1.08; letter-spacing: -0.02em;
-            margin: 0.75rem 0 1.75rem;
+            margin: 0.6rem 0 1.5rem;
         }
         h1 em { font-style: italic; color: var(--link); }
         .intro .lede { font-size: 1.3rem; line-height: 1.5; max-width: 34em; }
-        .intro .lede + p { color: var(--grey); margin-top: 1.1em; max-width: 36em; }
+        .intro .sub { color: var(--grey); margin-top: 1em; max-width: 36em; }
+        .cta { display: flex; align-items: center; flex-wrap: wrap; gap: 0.75rem 1.25rem; margin-top: 2rem; }
+        .cta .alt { font-size: 1.05rem; color: var(--grey); }
         figure { position: relative; }
         figure::before {
-            content: ""; position: absolute; inset: 0 0 auto 0; aspect-ratio: 4 / 5;
+            content: ""; position: absolute; inset: 0; aspect-ratio: 4 / 5;
             transform: translate(-10px, 10px); border: 1px solid var(--link); z-index: 0;
         }
         figure img { position: relative; z-index: 1; display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; filter: grayscale(0.15); }
-        figcaption { font-size: 0.9rem; font-style: italic; color: var(--grey); margin-top: 1rem; }
 
-        /* proof band */
+        /* tinted bands */
         .band { background: var(--wash); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
         .stats { display: grid; grid-template-columns: repeat(4, 1fr); }
         .stat { padding: 2.5rem 1.5rem 2.75rem; }
         .stat:first-child { padding-left: 0; }
         .stat:last-child { padding-right: 0; }
         .stat + .stat { border-left: 1px solid var(--rule); }
-        .stat .num {
+        .num {
             display: block; font-size: 2.6rem; font-weight: 300; line-height: 1.1; color: var(--link);
             font-variant-numeric: lining-nums;
         }
         .stat p { font-size: 1rem; color: var(--grey); margin-top: 0.5rem; line-height: 1.45; }
 
         /* sections */
-        section { padding: 4.5rem 0 0; }
+        section { padding: 5rem 0 0; }
         h2 { font-size: 1.75rem; font-weight: 600; line-height: 1.25; margin: 0.25rem 0 1.1rem; }
         h3 { font-size: 1.25rem; font-weight: 600; line-height: 1.3; margin-bottom: 0.45rem; }
+        .two { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; }
 
+        /* featured work */
+        .case-grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: 3rem; align-items: start; margin-top: 0.5rem; }
+        .case { border-left: 3px solid var(--link); padding-left: 1.5rem; }
+        .case dt { font-variant: all-small-caps; letter-spacing: 0.08em; color: var(--grey); font-size: 1.05rem; }
+        .case dd { margin: 0.1rem 0 1.25rem; }
+        .case dd:last-child { margin-bottom: 0; }
+        .result {
+            background: var(--wash); border: 1px solid var(--rule); padding: 2rem 1.75rem;
+        }
+        .result .num { font-size: 3.75rem; line-height: 1; }
+        .result .label { font-size: 1.1rem; margin-top: 0.5rem; }
+        .result ul { list-style: none; margin-top: 1.5rem; border-top: 1px solid var(--rule); }
+        .result li { padding: 0.6rem 0; border-bottom: 1px solid var(--rule); font-size: 1rem; color: var(--grey); }
+        .result li strong { color: var(--ink); font-weight: 600; }
+        .note { color: var(--grey); font-style: italic; margin-top: 1.25rem; font-size: 1rem; }
+
+        /* what I build */
         .builds { display: grid; grid-template-columns: 1fr 1fr; gap: 0 3rem; margin-top: 1.5rem; border-top: 1px solid var(--rule); }
         .build { padding: 1.6rem 0; border-bottom: 1px solid var(--rule); }
         .build p { font-size: 1.05rem; }
 
-        .fit { margin-top: 2.25rem; }
-        .fit ul { list-style: none; margin-top: 0.6rem; font-size: 1.1rem; }
-        .fit li { position: relative; padding-left: 1.4rem; }
-        .fit li + li { margin-top: 0.35rem; }
-        .fit li::before { content: "\2192"; position: absolute; left: 0; color: var(--link); }
-
         .trust {
             display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
-            margin-top: 3rem; padding: 1.5rem 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+            margin-top: 2rem; padding: 1.5rem 1.75rem; background: var(--wash); border: 1px solid var(--rule);
         }
         .trust div { font-size: 1.05rem; line-height: 1.4; }
         .trust strong { display: block; font-weight: 600; }
         .trust span { color: var(--grey); font-size: 0.98rem; }
 
-        .case { margin-top: 1.5rem; border-left: 3px solid var(--link); padding-left: 1.5rem; }
-        .case dt { font-variant: all-small-caps; letter-spacing: 0.08em; color: var(--grey); font-size: 1.05rem; }
-        .case dd { margin: 0.1rem 0 1.25rem; }
-        .case dd:last-child { margin-bottom: 0; }
-        .note { color: var(--grey); font-style: italic; margin-top: 1.25rem; font-size: 1rem; }
+        /* fit + how I work */
+        .fit ul { list-style: none; margin-top: 0.5rem; font-size: 1.1rem; }
+        .fit li { position: relative; padding-left: 1.4rem; }
+        .fit li + li { margin-top: 0.75rem; }
+        .fit li::before { content: "\2192"; position: absolute; left: 0; color: var(--link); }
 
-        .steps { list-style: none; margin: 1.5rem 0 0; counter-reset: step; }
-        .steps li { counter-increment: step; position: relative; padding-left: 3rem; font-size: 1.1rem; }
-        .steps li + li { margin-top: 1.1rem; }
+        .steps { list-style: none; margin-top: 0.5rem; counter-reset: step; }
+        .steps li { counter-increment: step; position: relative; padding-left: 2.75rem; font-size: 1.1rem; }
+        .steps li + li { margin-top: 1rem; }
         .steps li::before {
             content: counter(step); position: absolute; left: 0; top: -0.15rem;
             font-size: 1.9rem; font-weight: 300; font-style: italic; color: var(--link); line-height: 1;
         }
         .steps strong { font-weight: 600; }
 
-        .cv { margin-top: 2rem; border-top: 1px solid var(--rule); font-size: 1.05rem; }
-        .cv div { display: flex; gap: 1.5rem; padding: 0.6rem 0; border-bottom: 1px solid var(--rule); }
-        .cv .yr { flex: 0 0 6.5rem; color: var(--grey); font-variant-numeric: oldstyle-nums; }
+        /* about */
+        .cv { border-top: 1px solid var(--rule); font-size: 1.02rem; margin-top: 2.6rem; }
+        .cv div { display: flex; gap: 1.25rem; padding: 0.6rem 0; border-bottom: 1px solid var(--rule); }
+        .cv .yr { flex: 0 0 5.5rem; color: var(--grey); font-variant-numeric: oldstyle-nums; }
 
-        /* contact */
-        .contact { margin-top: 4.5rem; padding: 3rem 0; border-top: 3px solid var(--link); }
+        /* contact band */
+        .contact-band { margin-top: 5rem; border-top: 3px solid var(--link); }
+        .contact { display: grid; grid-template-columns: 1.5fr 1fr; gap: 3rem; align-items: center; padding: 3.5rem 0; }
         .contact .big {
             font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 300; line-height: 1.2; letter-spacing: -0.01em;
-            margin: 0.5rem 0 1.25rem;
+            margin: 0.5rem 0 1rem;
         }
-        .contact .big a { font-style: italic; overflow-wrap: anywhere; }
+        .contact .big a { font-style: italic; white-space: nowrap; }
+        .contact .side { display: flex; flex-direction: column; align-items: flex-start; gap: 0.6rem; font-size: 1.05rem; }
 
         footer {
-            padding: 1rem 0 3rem; border-top: 1px solid var(--rule);
+            padding: 1.25rem 0 3rem;
             font-size: 0.95rem; color: var(--grey);
             display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem 1rem;
         }
@@ -168,12 +184,12 @@
         @media (max-width: 760px) {
             body { font-size: 1.0625rem; }
             .masthead .name small { display: none; }
-            .call { padding: 0.5rem 0.9rem; font-size: 1rem; }
-            .intro { grid-template-columns: 1fr; gap: 2rem; padding: 3rem 0 3rem; }
+            .btn { padding: 0.5rem 0.9rem; font-size: 1rem; }
+            .btn.large { padding: 0.75rem 1.25rem; font-size: 1.05rem; }
+            .intro { grid-template-columns: 1fr; gap: 2rem; padding: 2.5rem 0 3rem; }
             figure { order: -1; width: 130px; }
             figure img, figure::before { aspect-ratio: 1; }
             figure::before { transform: translate(6px, 6px); }
-            figcaption { display: none; }
             .intro .lede { font-size: 1.15rem; }
             .stats { grid-template-columns: 1fr 1fr; }
             .stat, .stat:first-child, .stat:last-child { padding: 1.75rem 1rem 1.75rem 0; }
@@ -181,16 +197,22 @@
             .stat + .stat { border-left: 0; }
             .stat:nth-child(even) { border-left: 1px solid var(--rule); }
             .stat:nth-child(n+3) { border-top: 1px solid var(--rule); }
-            .stat .num { font-size: 2rem; }
-            section { padding-top: 3.25rem; }
-            .builds { grid-template-columns: 1fr; }
-            .trust { grid-template-columns: 1fr; gap: 1rem; }
+            .num { font-size: 2rem; }
+            section { padding-top: 3.5rem; }
+            .two, .case-grid, .builds, .contact { grid-template-columns: 1fr; }
+            .two, .case-grid { gap: 2.5rem; }
+            .contact { gap: 1.5rem; padding: 2.5rem 0; }
+            .trust { grid-template-columns: 1fr; gap: 1rem; padding: 1.25rem; }
+            .result .num { font-size: 3rem; }
+            .cv { margin-top: 0; }
             .cv div { flex-direction: column; gap: 0; }
             .cv .yr { flex: none; font-size: 0.95rem; }
         }
         @media (max-width: 600px) {
-            .call .full { display: none; }
-            .call .short { display: inline; }
+            .btn .full { display: none; }
+            .btn .short { display: inline; }
+            .btn.large .full { display: inline; }
+            .btn.large .short { display: none; }
         }
     </style>
 </head>
@@ -200,7 +222,7 @@
     <div class="page">
         <div class="masthead">
             <span class="name">John MacGillis<small>Software &amp; automation &middot; Halifax, Nova Scotia</small></span>
-            <a class="call" href="tel:+19024034993" aria-label="Call or text John at 902-403-4993">
+            <a class="btn" href="tel:+19024034993" aria-label="Call or text John at 902-403-4993">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>
                 <span class="full">Call or text 902-403-4993</span><span class="short">Call or text</span>
             </a>
@@ -215,11 +237,17 @@
             <span class="kicker">Software &amp; automation for professional firms</span>
             <h1>I build the software that does <em>your firm&rsquo;s paperwork.</em></h1>
             <p class="lede">Intake, document drafting, requests and follow-ups, and reporting, connected to the systems you already use, so skilled people can get back to skilled work.</p>
-            <p>I learned how inside a large regional law firm, where I ran growth and led the team that built its in-house software. Now I do it for other firms.</p>
+            <p class="sub">I learned how inside a large regional law firm, where I ran growth and led the team that built its in-house software.</p>
+            <div class="cta">
+                <a class="btn large" href="tel:+19024034993">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>
+                    <span class="full">Call or text 902-403-4993</span>
+                </a>
+                <span class="alt">or email <a href="mailto:john@johnmacgillis.ca">john@johnmacgillis.ca</a></span>
+            </div>
         </div>
         <figure>
             <img src="Headshot.jpg" alt="John MacGillis">
-            <figcaption>John MacGillis, Halifax</figcaption>
         </figure>
     </div>
 </div>
@@ -237,12 +265,32 @@
 
 <div class="page">
 
-    <section class="narrow">
-        <span class="kicker">The problem</span>
-        <h2>Your growth isn&rsquo;t limited by finding clients. It&rsquo;s limited by the paperwork each one creates.</h2>
-        <p>Every new client brings forms, letters, requests to third parties, follow-ups and reports. Most of it is done by hand, copied between a practice-management system, email, a fax machine and someone&rsquo;s spreadsheet.</p>
-        <p>So you hire another assistant. Then another. Meanwhile requests slip, follow-ups never go out, and files sit waiting on something nobody chased.</p>
-        <p>I&rsquo;ve seen it from the inside, and I&rsquo;ve built the software that fixed it.</p>
+    <section>
+        <span class="kicker">Featured work</span>
+        <h2>An automated records desk for a large regional law firm</h2>
+        <div class="case-grid">
+            <div>
+                <dl class="case">
+                    <dt>The problem</dt>
+                    <dd>Staff at a firm operating in four provinces were preparing thousands of records requests to hospitals, clinics, insurers and government offices by hand. Whether a follow-up went out depended on someone remembering, and more clients meant hiring more assistants.</dd>
+                    <dt>What we built</dt>
+                    <dd>A system connected to the firm&rsquo;s case-management software. It reads plain-language requests, matches them against a directory of 30,000 contacts, assembles the right forms with signatures, sends them, tracks replies, and follows up automatically with escalating letters.</dd>
+                    <dt>The result</dt>
+                    <dd>Follow-ups send themselves, and the system alerts the team when something needs a person.</dd>
+                </dl>
+                <p class="note">Built with a second developer as part of a 29-service platform designed to replace the firm&rsquo;s case-management software.</p>
+            </div>
+            <aside class="result">
+                <span class="num">10,000+</span>
+                <p class="label">requests sent in four months</p>
+                <ul>
+                    <li><strong>30,000</strong> contacts matched automatically</li>
+                    <li><strong>Fax, email, mail</strong> and government portals</li>
+                    <li><strong>4 provinces</strong> of forms and consent rules</li>
+                    <li><strong>Automatic</strong> escalating follow-ups</li>
+                </ul>
+            </aside>
+        </div>
     </section>
 
     <section>
@@ -266,14 +314,6 @@
                 <p>Practice management, accounting, Microsoft 365, Teams, phone and fax, connected instead of re-typed. Outgrown a vendor? I&rsquo;ll get your data out and build what&rsquo;s missing.</p>
             </div>
         </div>
-        <div class="fit narrow">
-            <span class="kicker">A good fit if</span>
-            <ul>
-                <li>Your staff re-type the same information into three different systems</li>
-                <li>Chasing documents from third parties is someone&rsquo;s full-time job</li>
-                <li>Taking on more work means hiring another assistant</li>
-            </ul>
-        </div>
         <div class="trust">
             <div><strong>Hosted in Canada</strong><span>On your own cloud account, under your control.</span></div>
             <div><strong>Your data never trains AI</strong><span>Client files are processed, never used to train models.</span></div>
@@ -281,36 +321,34 @@
         </div>
     </section>
 
-    <section class="narrow">
-        <span class="kicker">Featured work</span>
-        <h2>An automated records desk for a large regional law firm</h2>
-        <dl class="case">
-            <dt>The problem</dt>
-            <dd>Staff at a firm operating in four provinces were preparing thousands of records requests to hospitals, clinics, insurers and government offices by hand. Whether a follow-up went out depended on someone remembering.</dd>
-            <dt>What we built</dt>
-            <dd>A system connected to the firm&rsquo;s case-management software. It reads plain-language requests, matches them against a directory of 30,000 contacts, assembles the right forms with signatures, sends them, tracks replies, and follows up automatically with escalating letters.</dd>
-            <dt>The result</dt>
-            <dd>10,000+ requests sent in four months. Follow-ups send themselves, and the system alerts the team when something needs a person.</dd>
-        </dl>
-        <p class="note">Built with a second developer as part of a 29-service platform designed to replace the firm&rsquo;s case-management software.</p>
+    <section class="two">
+        <div class="fit">
+            <span class="kicker">A good fit if</span>
+            <h2>You&rsquo;ll recognize these</h2>
+            <ul>
+                <li>Your staff re-type the same information into three different systems</li>
+                <li>Chasing documents from third parties is someone&rsquo;s full-time job</li>
+                <li>Taking on more work means hiring another assistant</li>
+            </ul>
+        </div>
+        <div>
+            <span class="kicker">How I work</span>
+            <h2>Practical, honest, built to last</h2>
+            <ol class="steps">
+                <li><strong>Find the bottleneck.</strong> A short conversation about where your team loses the most time, and an honest answer on whether software will fix it.</li>
+                <li><strong>Build around what you have.</strong> No new platform to adopt. I connect to the systems you already pay for.</li>
+                <li><strong>Run it like production.</strong> Tested before every release and monitored, with alerts when something needs attention.</li>
+            </ol>
+        </div>
     </section>
 
-    <section class="narrow">
-        <span class="kicker">How I work</span>
-        <h2>Practical, honest, built to last</h2>
-        <ol class="steps">
-            <li><strong>Find the bottleneck.</strong> A short conversation about where your team loses the most time, and an honest answer on whether software will fix it.</li>
-            <li><strong>Build around what you have.</strong> No new platform to adopt. I connect to the systems you already pay for.</li>
-            <li><strong>Run it like production.</strong> Tested before every release and monitored, with alerts when something needs attention.</li>
-        </ol>
-    </section>
-
-    <section class="narrow">
-        <span class="kicker">About</span>
-        <h2>Where I&rsquo;ve done this before</h2>
-        <p>Most recently I was Director of Growth at a large regional law firm operating in four Atlantic provinces. I ran about $600K a month in advertising, led a seven-person team across growth and technology, and led the build of the firm&rsquo;s in-house software platform.</p>
-        <p>That&rsquo;s why the software I build starts from how a firm actually makes money, not from a list of features. I trained as a journalist at Carleton, which is mostly why I start every project by asking a lot of questions.</p>
-
+    <section class="two">
+        <div>
+            <span class="kicker">About</span>
+            <h2>Business side first, then the code</h2>
+            <p>As Director of Growth at a large Atlantic Canadian law firm, I ran about $600K a month in advertising and led a seven-person team across growth and technology. That&rsquo;s why the software I build starts from how a firm actually makes money, not from a list of features.</p>
+            <p>I trained as a journalist at Carleton, which is mostly why I start every project by asking a lot of questions.</p>
+        </div>
         <div class="cv">
             <div><span class="yr">2025&ndash;26</span><span>Director of Growth, regional law firm (Atlantic Canada)</span></div>
             <div><span class="yr">2023&ndash;25</span><span>Director of Marketing; Digital Marketing Strategist, same firm</span></div>
@@ -320,17 +358,35 @@
         </div>
     </section>
 
-    <div class="contact">
-        <span class="kicker">Get in touch</span>
-        <p class="big">Call or text me at <a href="tel:+19024034993">902-403-4993</a></p>
-        <p>Tell me where your team is losing time, and I&rsquo;ll tell you honestly whether software will fix it. Prefer to <a href="sms:+19024034993">send a text</a>? That works too. You can also email <a href="mailto:john@johnmacgillis.ca">john@johnmacgillis.ca</a> or find me on <a href="https://www.linkedin.com/in/john-macgillis-073236158/" target="_blank" rel="noopener">LinkedIn</a>.</p>
-    </div>
+</div>
 
+<div class="band contact-band">
+    <div class="page">
+        <div class="contact">
+            <div>
+                <span class="kicker">Get in touch</span>
+                <p class="big">Call or text me at <a href="tel:+19024034993">902-403-4993</a></p>
+                <p>Tell me where your team is losing time, and I&rsquo;ll tell you honestly whether software will fix it.</p>
+            </div>
+            <div class="side">
+                <a class="btn large" href="tel:+19024034993">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>
+                    <span class="full">Call 902-403-4993</span>
+                </a>
+                <a href="sms:+19024034993">Send a text</a>
+                <a href="mailto:john@johnmacgillis.ca">john@johnmacgillis.ca</a>
+                <a href="https://www.linkedin.com/in/john-macgillis-073236158/" target="_blank" rel="noopener">LinkedIn</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="page">
     <footer>
         <span>&copy; 2026 John MacGillis &middot; Halifax, Nova Scotia</span>
         <span><a href="tel:+19024034993">902-403-4993</a> &middot; <a href="mailto:john@johnmacgillis.ca">Email</a> &middot; <a href="https://www.linkedin.com/in/john-macgillis-073236158/" target="_blank" rel="noopener">LinkedIn</a></span>
     </footer>
-
 </div>
+
 </body>
 </html>
